@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "target": "es5",
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "@domain/*": ["domain/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"]
+    },
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true
+  }
+}
