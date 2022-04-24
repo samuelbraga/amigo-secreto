@@ -6,6 +6,9 @@ import '@shared/container'
 import express from 'express';
 import cors from 'cors';
 
+import swaggerUi from 'swagger-ui-express'; 
+import swaggerFile from './swagger.json'
+
 import routes from '@shared/http/routes';
 
 const app = express();
@@ -18,6 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.use(routes);
 

@@ -1,0 +1,80 @@
+{
+    "openapi": "3.0.3",
+    "title": "Amigo Oculto API",
+    "description": "Api para criação, gerenciamento e controle de amigo oculto",
+    "version": "1.0.1",
+    "servers": [
+        {
+            "url": "http://localhost:3333/v1",
+            "description": "Development server"
+        },
+        {
+            "url": "https://api.mumuz.in/v1",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "post": {
+                "description": "Create and return an user",
+                "summary": "Create user",
+                "operationId": "createUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created User",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserResponse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    }
+                }
+            },
+            "CreateUserRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Foo Bar"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "foo.bar@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "#%P&pM4z"
+                    }
+                }
+            }
+        }
+    }
+}
