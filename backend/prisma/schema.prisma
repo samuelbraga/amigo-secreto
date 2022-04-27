@@ -14,4 +14,16 @@ model User {
     password   String
     created_at DateTime  @default(now())
     updated_at DateTime?
+
+    @@map("user")
+}
+
+model UserToken {
+    id         String    @id @default(uuid())
+    token      String    @default(uuid())
+    user_id    String
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
+    @@map("user_token")
 }

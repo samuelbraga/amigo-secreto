@@ -5,7 +5,7 @@ export default interface IUserResponse {
    updated_at: Date | null;
 }
 
-export class UserResponse {
+export class UserResponse implements IUserResponse{
     id: string;
     name: string;
     created_at: Date

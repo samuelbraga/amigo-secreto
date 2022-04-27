@@ -3,8 +3,7 @@ import { container } from "tsyringe";
 import HttpStatus from 'http-status-codes'
 
 import CreateUserService from "../../services/CreateUserService";
-import ICreateUserRequest from "../dto/ICreateUserRequest";
-import IUserResponse from "../dto/IUserResponse";
+import ICreateUserRequest from "../dtos/ICreateUserRequest";
 import { fromUser } from "@domain/user/mapper/MappingUser";
 
 export default class UserController {
@@ -15,7 +14,7 @@ export default class UserController {
         
         const user = await createUserService.execute(requestModel);
 
-        const userResponse: IUserResponse = fromUser(user);
+        const userResponse = fromUser(user);
 
         return response.status(HttpStatus.CREATED).json(userResponse);
     }

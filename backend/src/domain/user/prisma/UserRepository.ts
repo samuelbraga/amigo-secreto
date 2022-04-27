@@ -1,6 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
-import ICreateUserRequest from "../http/dto/ICreateUserRequest";
+import ICreateUserRequest from "../http/dtos/ICreateUserRequest";
 import IUserRepository from "../repositories/IUserRepository";
 
 @injectable()
@@ -12,13 +12,52 @@ class UserRepository implements IUserRepository{
     ) {}
     
     public async save(data: ICreateUserRequest): Promise<User> {
-        const { name, email } = data;
+        const { name, password, email } = data;
         
         const user = await this.prisma.user.create({
             data: {
                 name,
-                email
+                password,
+                email,
             }
+        });
+
+        return user;
+    }
+
+    public async update(data: User): Promise<User> {
+        const { id, name, password, email } = data;
+
+        const user = await this.prisma.user.update({
+            where: {
+                id
+            },
+            data: {
+                name,
+                email,
+                password,
+                updated_at: new Date(Date.now()).toISOString()
+            }
+        });
+
+        return user;
+    }
+
+    public async findUserById(user_id: string): Promise<User | null>{
+        const user = await this.prisma.user.findFirst({
+            where: {
+                id: user_id
+            },
+        });
+
+        return user;
+    }
+
+    public async findUserByEmail(email: string): Promise<User | null>{
+        const user = await this.prisma.user.findFirst({
+            where: {
+                email
+            },
         });
 
         return user;

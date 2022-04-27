@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-app.use(routes);
+app.use('/v1', routes);
 
 const { PORT } = process.env;
 app.listen(PORT || 3333, () => {

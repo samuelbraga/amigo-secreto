@@ -1,8 +1,8 @@
 import { User } from "@prisma/client"
-import IUserResponse, { UserResponse } from "../http/dto/IUserResponse"
+import IUserResponse, { UserResponse } from "../http/dtos/IUserResponse"
 
 export const fromUser = (from: User): IUserResponse => {
-    const userResponse: IUserResponse = new UserResponse({
+    const userResponse = new UserResponse({
         id: from.id,
         name: from.name,
         created_at: from.created_at,
