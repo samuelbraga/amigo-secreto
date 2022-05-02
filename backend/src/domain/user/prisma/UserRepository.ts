@@ -1,25 +1,26 @@
-import { PrismaClient, User } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
+
+import { PrismaClient, User } from "@prisma/client";
+
 import ICreateUserRequest from "../http/dtos/ICreateUserRequest";
 import IUserRepository from "../repositories/IUserRepository";
 
 @injectable()
-class UserRepository implements IUserRepository{
-
+class UserRepository implements IUserRepository {
     constructor(
-        @inject('PrismaClient')
+        @inject("PrismaClient")
         private readonly prisma: PrismaClient
     ) {}
-    
+
     public async save(data: ICreateUserRequest): Promise<User> {
         const { name, password, email } = data;
-        
+
         const user = await this.prisma.user.create({
             data: {
                 name,
                 password,
                 email,
-            }
+            },
         });
 
         return user;
@@ -30,33 +31,33 @@ class UserRepository implements IUserRepository{
 
         const user = await this.prisma.user.update({
             where: {
-                id
+                id,
             },
             data: {
                 name,
                 email,
                 password,
-                updated_at: new Date(Date.now()).toISOString()
-            }
-        });
-
-        return user;
-    }
-
-    public async findUserById(user_id: string): Promise<User | null>{
-        const user = await this.prisma.user.findFirst({
-            where: {
-                id: user_id
+                updated_at: new Date(Date.now()).toISOString(),
             },
         });
 
         return user;
     }
 
-    public async findUserByEmail(email: string): Promise<User | null>{
+    public async findUserById(user_id: string): Promise<User | null> {
         const user = await this.prisma.user.findFirst({
             where: {
-                email
+                id: user_id,
+            },
+        });
+
+        return user;
+    }
+
+    public async findUserByEmail(email: string): Promise<User | null> {
+        const user = await this.prisma.user.findFirst({
+            where: {
+                email,
             },
         });
 

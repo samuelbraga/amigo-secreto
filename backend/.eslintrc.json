@@ -19,6 +19,7 @@
     "plugins": [
         "@typescript-eslint",
         "eslint-plugin-import-helpers",
+        "module-resolver",
         "prettier"
     ],
     "rules": {
@@ -61,7 +62,8 @@
         "import/no-extraneous-dependencies": [
             "error",
             { "devDependencies": ["**/*.spec.js"] }
-        ]
+        ],
+        "module-resolver/use-alias": 2
     },
     "settings": {
         "import/resolver": {

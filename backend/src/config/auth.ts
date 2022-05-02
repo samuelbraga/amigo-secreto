@@ -1,9 +1,9 @@
 interface IAuthConfig {
     secret: string;
     expiresIn: string;
-  }
-  
-  export default {
+}
+
+export default {
     secret: `${process.env.JWT_SECRET}`,
-    expiresIn: '1d',
-  } as IAuthConfig;
+    expiresIn: "1d",
+} as IAuthConfig;
