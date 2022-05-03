@@ -6,10 +6,12 @@ import "@shared/container";
 import cors from "cors";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
+import { errors } from 'celebrate'
 
 import routes from "@shared/http/routes";
 
 import swaggerFile from "./swagger.json";
+import ErrorHandler from "./middleware/ErrorHandler";
 
 const app = express();
 app.disable("x-powered-by");
@@ -25,6 +27,9 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use("/v1", routes);
+
+app.use(errors());
+app.use(ErrorHandler);
 
 const { PORT } = process.env;
 app.listen(PORT || 3333, () => {
