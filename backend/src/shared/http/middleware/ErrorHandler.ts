@@ -1,7 +1,11 @@
   import { Request, Response, NextFunction } from 'express';
 
 interface IErrorBase extends Error {
-  statusCode?: number;
+    type?: string;
+    title?: string;
+    statusCode?: number;
+    detail?: string;
+    instace?: string;
 }
 
 export default (
@@ -13,7 +17,11 @@ export default (
   if (err.statusCode) {
     return response
       .status(err.statusCode)
-      .json({ status: 'error', error: err.message });
+      .json({ type: err.type,
+        title: err.title,
+        status: err.statusCode,
+        detail: err.detail,
+        instace: err.instace, });
   }
 
   return response.status(500).json({ status: 'error', error: err.message });

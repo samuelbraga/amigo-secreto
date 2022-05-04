@@ -7,6 +7,8 @@ import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository
 import IMailProvider from "@shared/container/providers/mailProvider/models/IMailProvider";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
+import * as messages from "constants/messages";
+
 interface IRequest {
     email: string;
 }
@@ -29,8 +31,11 @@ class SendForgotPasswordEmailService {
 
         if (!user) {
             throw new ExceptionBase(
+                messages.USER_DOES_NOT_EXISTS_TYPE,
+                messages.USER_DOES_NOT_EXISTS_TITLE,
                 HttpStatus.BAD_REQUEST,
-                "User does not exists"
+                messages.USER_DOES_NOT_EXISTS_DETAIL,
+                messages.INCORRECT_CREDENTIALS_INSTACE
             );
         }
 

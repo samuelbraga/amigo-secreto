@@ -12,6 +12,8 @@ import { fromUser } from "../mapper/MappingUser";
 import IHashProvider from "../providers/hashProvider/models/IHashProvider";
 import IUserRepository from "../repositories/IUserRepository";
 
+import * as messages from "constants/messages";
+
 @injectable()
 class CreateSessionService {
     constructor(
@@ -46,10 +48,7 @@ class CreateSessionService {
         const user = await this.userRepository.findUserByEmail(email);
 
         if (!user) {
-            throw new ExceptionBase(
-                HttpStatus.UNAUTHORIZED,
-                "Incorrect email or password"
-            );
+            throw this.createExceptionBase();
         }
 
         return user;
@@ -65,13 +64,20 @@ class CreateSessionService {
         );
 
         if (!passwordMatched) {
-            throw new ExceptionBase(
-                HttpStatus.UNAUTHORIZED,
-                "Incorrect email or password"
-            );
+            throw this.createExceptionBase();
         }
 
         return passwordMatched;
+    }
+
+    private createExceptionBase(): ExceptionBase {
+        return new ExceptionBase(
+            messages.INCORRECT_CREDENTIALS_TYPE,
+            messages.INCORRECT_CREDENTIALS_TITLE,
+            HttpStatus.UNAUTHORIZED,
+            messages.INCORRECT_CREDENTIALS_DETAIL,
+            messages.INCORRECT_CREDENTIALS_INSTACE,
+        );
     }
 }
 
