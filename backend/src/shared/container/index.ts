@@ -1,3 +1,4 @@
+import { USER_REPOSITORY, USER_TOKEN_REPOSITORY } from "constants/application";
 import { container } from "tsyringe";
 
 import "@shared/container/providers";
@@ -8,9 +9,9 @@ import UserTokenRepository from "@domain/user/prisma/UserTokenRepository";
 import IUserRepository from "@domain/user/repositories/IUserRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 
-container.registerSingleton<IUserRepository>("UserRepository", UserRepository);
+container.registerSingleton<IUserRepository>(USER_REPOSITORY, UserRepository);
 
 container.registerSingleton<IUserTokenRepository>(
-    "UserTokenRepository",
+    USER_TOKEN_REPOSITORY,
     UserTokenRepository
 );

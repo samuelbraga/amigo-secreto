@@ -1,3 +1,4 @@
+import { MAIL_TEMPLATE_PROVIDER } from "constants/application";
 import nodemailer, { Transporter } from "nodemailer";
 import { injectable, inject } from "tsyringe";
 
@@ -10,7 +11,7 @@ class EtherealMailProvider implements IMailProvider {
     private client: Transporter;
 
     constructor(
-        @inject("MailTemplateProvider")
+        @inject(MAIL_TEMPLATE_PROVIDER)
         private mailTemplateProvider: IMailTemplateProvider
     ) {
         nodemailer.createTestAccount().then((account) => {

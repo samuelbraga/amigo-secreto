@@ -1,3 +1,8 @@
+import {
+    MAIL_PROVIDER,
+    USER_REPOSITORY,
+    USER_TOKEN_REPOSITORY,
+} from "constants/application";
 import * as messages from "constants/messages";
 import HttpStatus from "http-status-codes";
 import path from "path";
@@ -15,13 +20,13 @@ interface IRequest {
 @injectable()
 class SendForgotPasswordEmailService {
     constructor(
-        @inject("UserRepository")
+        @inject(USER_REPOSITORY)
         private readonly userRepository: IUserRepository,
 
-        @inject("MailProvider")
+        @inject(MAIL_PROVIDER)
         private readonly mailProvider: IMailProvider,
 
-        @inject("UserTokenRepository")
+        @inject(USER_TOKEN_REPOSITORY)
         private readonly userTokenRepository: IUserTokenRepository
     ) {}
 

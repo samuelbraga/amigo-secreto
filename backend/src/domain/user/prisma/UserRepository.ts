@@ -1,3 +1,4 @@
+import { PRIMA_CLIENT } from "constants/application";
 import { inject, injectable } from "tsyringe";
 
 import { PrismaClient, User } from "@prisma/client";
@@ -8,7 +9,7 @@ import IUserRepository from "../repositories/IUserRepository";
 @injectable()
 class UserRepository implements IUserRepository {
     constructor(
-        @inject("PrismaClient")
+        @inject(PRIMA_CLIENT)
         private readonly prisma: PrismaClient
     ) {}
 

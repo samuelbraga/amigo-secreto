@@ -1,3 +1,8 @@
+import {
+    HASH_PROVIDER,
+    USER_REPOSITORY,
+    USER_TOKEN_REPOSITORY,
+} from "constants/application";
 import * as messages from "constants/messages";
 import { isAfter, addHours } from "date-fns";
 import HttpStatus from "http-status-codes";
@@ -16,13 +21,13 @@ interface IRequest {
 @injectable()
 class ResetPasswordService {
     constructor(
-        @inject("UserRepository")
+        @inject(USER_REPOSITORY)
         private readonly usersepository: IUserRepository,
 
-        @inject("UserTokenRepository")
+        @inject(USER_TOKEN_REPOSITORY)
         private readonly userTokenRepository: IUserTokenRepository,
 
-        @inject("HashProvider")
+        @inject(HASH_PROVIDER)
         private readonly hashProvider: IHashProvider
     ) {}
 

@@ -1,3 +1,4 @@
+import { HASH_PROVIDER, USER_REPOSITORY } from "constants/application";
 import { inject, injectable } from "tsyringe";
 
 import { User } from "@prisma/client";
@@ -9,10 +10,10 @@ import IUserRepository from "../repositories/IUserRepository";
 @injectable()
 class CreateUserService {
     constructor(
-        @inject("UserRepository")
+        @inject(USER_REPOSITORY)
         private readonly repository: IUserRepository,
 
-        @inject("HashProvider")
+        @inject(HASH_PROVIDER)
         private readonly hashProvider: IHashProvider
     ) {}
 

@@ -1,3 +1,4 @@
+import { MAIL_PROVIDER } from "constants/application";
 import { container } from "tsyringe";
 
 import mailConfig from "@config/mail";
@@ -9,6 +10,6 @@ const providers = {
 };
 
 container.registerInstance<IMailProvider>(
-    "MailProvider",
+    MAIL_PROVIDER,
     providers[mailConfig.driver]
 );

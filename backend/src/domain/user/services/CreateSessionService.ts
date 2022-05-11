@@ -1,3 +1,4 @@
+import { HASH_PROVIDER, USER_REPOSITORY } from "constants/application";
 import * as messages from "constants/messages";
 import HttpStatus from "http-status-codes";
 import { sign } from "jsonwebtoken";
@@ -16,10 +17,10 @@ import IUserRepository from "../repositories/IUserRepository";
 @injectable()
 class CreateSessionService {
     constructor(
-        @inject("UserRepository")
+        @inject(USER_REPOSITORY)
         private readonly userRepository: IUserRepository,
 
-        @inject("HashProvider")
+        @inject(HASH_PROVIDER)
         private readonly hashProvider: IHashProvider
     ) {}
 
