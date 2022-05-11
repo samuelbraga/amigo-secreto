@@ -3,13 +3,14 @@
     "lib": ["esnext"],
     "target": "es5",
     "module": "commonjs",
-    "baseUrl": "./src",
-    "rootDir": "./src",
+    "baseUrl": ".",
+    "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@domain/*": ["domain/*"],
-      "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+      "@domain/*": ["src/domain/*"],
+      "@config/*": ["src/config/*"],
+      "@shared/*": ["src/shared/*"],
+      "@constants/*": ["src/constants/*"]
     },
     "strict": true,
     "sourceMap": true,

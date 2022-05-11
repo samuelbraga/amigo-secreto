@@ -1,4 +1,4 @@
-import { USER_REPOSITORY, USER_TOKEN_REPOSITORY } from "constants/application";
+import { USER_REPOSITORY, USER_TOKEN_REPOSITORY } from "@constants/application";
 import { container } from "tsyringe";
 
 import "@shared/container/providers";

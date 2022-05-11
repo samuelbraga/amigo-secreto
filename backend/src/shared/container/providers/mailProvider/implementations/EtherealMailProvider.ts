@@ -1,4 +1,4 @@
-import { MAIL_TEMPLATE_PROVIDER } from "constants/application";
+import { MAIL_TEMPLATE_PROVIDER } from "@constants/application";
 import nodemailer, { Transporter } from "nodemailer";
 import { injectable, inject } from "tsyringe";
 

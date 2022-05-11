@@ -1,4 +1,4 @@
-import { HASH_PROVIDER, USER_REPOSITORY } from "constants/application";
+import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
 import { inject, injectable } from "tsyringe";
 
 import { User } from "@prisma/client";

@@ -1,4 +1,4 @@
-import { MAIL_TEMPLATE_PROVIDER } from "constants/application";
+import { MAIL_TEMPLATE_PROVIDER } from "@constants/application";
 import { container } from "tsyringe";
 
 import HandlebarsMailTemplateProvider from "@shared/container/providers/mailTemplateProvider/implementations/HandlebarsMailTemplateProvider";

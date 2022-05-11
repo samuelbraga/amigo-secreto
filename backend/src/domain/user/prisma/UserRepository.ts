@@ -1,4 +1,4 @@
-import { PRIMA_CLIENT } from "constants/application";
+import { PRIMA_CLIENT } from "@constants/application";
 import { inject, injectable } from "tsyringe";
 
 import { PrismaClient, User } from "@prisma/client";

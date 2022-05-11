@@ -2,8 +2,8 @@ import {
     MAIL_PROVIDER,
     USER_REPOSITORY,
     USER_TOKEN_REPOSITORY,
-} from "constants/application";
-import * as messages from "constants/messages";
+} from "@constants/application";
+import * as messages from "@constants/messages";
 import HttpStatus from "http-status-codes";
 import path from "path";
 import { injectable, inject } from "tsyringe";

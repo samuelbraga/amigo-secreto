@@ -1,5 +1,5 @@
-import { HASH_PROVIDER, USER_REPOSITORY } from "constants/application";
-import * as messages from "constants/messages";
+import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
+import * as messages from "@constants/messages";
 import HttpStatus from "http-status-codes";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";

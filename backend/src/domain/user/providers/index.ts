@@ -1,4 +1,4 @@
-import { HASH_PROVIDER } from "constants/application";
+import { HASH_PROVIDER } from "@constants/application";
 import { container } from "tsyringe";
 
 import BCryptHashProvider from "@domain/user/providers/hashProvider/implementations/BCryptHashProvider";

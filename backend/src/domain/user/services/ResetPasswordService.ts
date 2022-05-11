@@ -2,8 +2,8 @@ import {
     HASH_PROVIDER,
     USER_REPOSITORY,
     USER_TOKEN_REPOSITORY,
-} from "constants/application";
-import * as messages from "constants/messages";
+} from "@constants/application";
+import * as messages from "@constants/messages";
 import { isAfter, addHours } from "date-fns";
 import HttpStatus from "http-status-codes";
 import { injectable, inject } from "tsyringe";

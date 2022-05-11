@@ -1,4 +1,4 @@
-import { MAIL_PROVIDER } from "constants/application";
+import { MAIL_PROVIDER } from "@constants/application";
 import { container } from "tsyringe";
 
 import mailConfig from "@config/mail";
