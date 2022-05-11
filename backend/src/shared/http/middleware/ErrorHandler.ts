@@ -1,4 +1,4 @@
-  import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 interface IErrorBase extends Error {
     type?: string;
@@ -9,20 +9,20 @@ interface IErrorBase extends Error {
 }
 
 export default (
-  err: IErrorBase,
-  request: Request,
-  response: Response,
-  _: NextFunction,
+    err: IErrorBase,
+    request: Request,
+    response: Response,
+    _next: NextFunction
 ): Response => {
-  if (err.statusCode) {
-    return response
-      .status(err.statusCode)
-      .json({ type: err.type,
-        title: err.title,
-        status: err.statusCode,
-        detail: err.detail,
-        instace: err.instace, });
-  }
+    if (err.statusCode) {
+        return response.status(err.statusCode).json({
+            type: err.type,
+            title: err.title,
+            status: err.statusCode,
+            detail: err.detail,
+            instace: err.instace,
+        });
+    }
 
-  return response.status(500).json({ status: 'error', error: err.message });
+    return response.status(500).json({ status: "error", error: err.message });
 };

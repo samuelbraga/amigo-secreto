@@ -1,3 +1,4 @@
+import * as messages from "constants/messages";
 import HttpStatus from "http-status-codes";
 import path from "path";
 import { injectable, inject } from "tsyringe";
@@ -6,8 +7,6 @@ import IUserRepository from "@domain/user/repositories/IUserRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import IMailProvider from "@shared/container/providers/mailProvider/models/IMailProvider";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
-
-import * as messages from "constants/messages";
 
 interface IRequest {
     email: string;

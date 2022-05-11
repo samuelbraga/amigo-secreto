@@ -1,3 +1,4 @@
+import * as messages from "constants/messages";
 import HttpStatus from "http-status-codes";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
@@ -11,8 +12,6 @@ import ISessionResponse from "../http/dtos/ISessionResponse";
 import { fromUser } from "../mapper/MappingUser";
 import IHashProvider from "../providers/hashProvider/models/IHashProvider";
 import IUserRepository from "../repositories/IUserRepository";
-
-import * as messages from "constants/messages";
 
 @injectable()
 class CreateSessionService {
@@ -76,7 +75,7 @@ class CreateSessionService {
             messages.INCORRECT_CREDENTIALS_TITLE,
             HttpStatus.UNAUTHORIZED,
             messages.INCORRECT_CREDENTIALS_DETAIL,
-            messages.INCORRECT_CREDENTIALS_INSTACE,
+            messages.INCORRECT_CREDENTIALS_INSTACE
         );
     }
 }

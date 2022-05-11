@@ -1,3 +1,4 @@
+import * as messages from "constants/messages";
 import { isAfter, addHours } from "date-fns";
 import HttpStatus from "http-status-codes";
 import { injectable, inject } from "tsyringe";
@@ -6,8 +7,6 @@ import IHashProvider from "@domain/user/providers/hashProvider/models/IHashProvi
 import IUserRepository from "@domain/user/repositories/IUserRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
-
-import * as messages from "constants/messages";
 
 interface IRequest {
     token: string;

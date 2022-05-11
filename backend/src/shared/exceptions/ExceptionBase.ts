@@ -5,7 +5,13 @@ class ExceptionBase extends Error {
     public detail: string;
     public instance: string;
 
-    constructor(type: string, title: string, status: number, detail: string, instance: string) {
+    constructor(
+        type: string,
+        title: string,
+        status: number,
+        detail: string,
+        instance: string
+    ) {
         super();
         this.type = type;
         this.title = title;
