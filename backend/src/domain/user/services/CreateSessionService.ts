@@ -1,10 +1,10 @@
-import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
-import * as messages from "@constants/messages";
 import HttpStatus from "http-status-codes";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
 import authConfig from "@config/auth";
+import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
+import * as messages from "@constants/messages";
 import { User } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 

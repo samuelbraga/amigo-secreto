@@ -1,6 +1,6 @@
-import { PRIMA_CLIENT } from "@constants/application";
 import { inject, injectable } from "tsyringe";
 
+import { PRIMA_CLIENT } from "@constants/application";
 import { PrismaClient, UserToken } from "@prisma/client";
 
 import IUserTokenRepository from "../repositories/IUserTokenRepository";

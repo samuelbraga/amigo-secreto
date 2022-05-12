@@ -1,6 +1,6 @@
-import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
 import { inject, injectable } from "tsyringe";
 
+import { HASH_PROVIDER, USER_REPOSITORY } from "@constants/application";
 import { User } from "@prisma/client";
 
 import ICreateUserRequest from "../http/dtos/ICreateUserRequest";

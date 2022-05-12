@@ -1,6 +1,6 @@
-import { PRIMA_CLIENT } from "@constants/application";
 import { inject, injectable } from "tsyringe";
 
+import { PRIMA_CLIENT } from "@constants/application";
 import { PrismaClient, User } from "@prisma/client";
 
 import ICreateUserRequest from "../http/dtos/ICreateUserRequest";

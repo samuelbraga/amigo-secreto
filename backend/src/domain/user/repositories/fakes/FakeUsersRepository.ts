@@ -1,6 +1,7 @@
+import { v4 } from "uuid";
+
 import IUsersRepository from "@domain/user/repositories/IUserRepository";
 import { User } from "@prisma/client";
-import {v4} from 'uuid';
 
 class FakeUsersRepository implements IUsersRepository {
     private users: User[] = [];
@@ -17,8 +18,15 @@ class FakeUsersRepository implements IUsersRepository {
         return findUser;
     }
 
-    public async save(user: User): Promise<User> {
-        user.id = v4()
+    public async save({ name, email, password }: User): Promise<User> {
+        const user: User = {
+            id: v4(),
+            name,
+            email,
+            password,
+            created_at: new Date(Date.now()),
+            updated_at: new Date(Date.now()),
+        };
         this.users.push(user);
         return user;
     }

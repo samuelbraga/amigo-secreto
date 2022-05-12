@@ -1,13 +1,13 @@
+import HttpStatus from "http-status-codes";
+import path from "path";
+import { injectable, inject } from "tsyringe";
+
 import {
     MAIL_PROVIDER,
     USER_REPOSITORY,
     USER_TOKEN_REPOSITORY,
 } from "@constants/application";
 import * as messages from "@constants/messages";
-import HttpStatus from "http-status-codes";
-import path from "path";
-import { injectable, inject } from "tsyringe";
-
 import IUserRepository from "@domain/user/repositories/IUserRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import IMailProvider from "@shared/container/providers/mailProvider/models/IMailProvider";
