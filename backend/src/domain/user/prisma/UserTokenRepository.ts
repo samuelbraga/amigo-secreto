@@ -33,7 +33,7 @@ class UserTokenRepository implements IUserTokenRepository {
             });
         }
 
-        const userToken = this.prisma.userToken.create({
+        const userToken = await this.prisma.userToken.create({
             data: {
                 user_id,
             },
