@@ -1,7 +1,13 @@
+export const USER_INSTANCE = "user";
+
+export const USER_EMAIL_EXISTS_TYPE = "user.post";
+export const USER_EMAIL_EXISTS_TITLE = "Email já cadastrado";
+export const USER_EMAIL_EXISTS_DETAIL =
+    "Email informado já foi cadastrado na base";
+
 export const USER_DOES_NOT_EXISTS_TYPE = "user.get";
 export const USER_DOES_NOT_EXISTS_TITLE = "Usuário não existe";
 export const USER_DOES_NOT_EXISTS_DETAIL = "O usuário informado não existe";
-export const USER_DOES_NOT_EXISTS_INSTANCE = "user";
 
 export const USER_TOKEN_CREDENTIALS_DOES_NOT_EXISTS_TYPE =
     "user.token.credentials";
