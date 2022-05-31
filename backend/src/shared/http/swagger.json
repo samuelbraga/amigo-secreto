@@ -1,0 +1,164 @@
+{
+    "openapi": "3.0.3",
+    "title": "Amigo Oculto API",
+    "description": "Api para criação, gerenciamento e controle de amigo oculto",
+    "version": "1.0.1",
+    "servers": [
+        {
+            "url": "http://localhost:3333/v1",
+            "description": "Development server"
+        },
+        {
+            "url": "https://api.mumuz.in/v1",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "post": {
+                "description": "Create and return an user",
+                "summary": "Create user",
+                "operationId": "createUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created User",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions": {
+            "post": {
+                "description": "Create an auth token by email and password",
+                "summary": "Create an auth token",
+                "operationId": "createToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSessionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SessionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUserRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Foo Bar"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "foo.bar@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "#%P&pM4z"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ]
+            },
+            "UserResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "created_at"
+                ]
+            },
+            "CreateSessionRequest": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "foo.bar@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "#%P&pM4z"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            },
+            "SessionResponse": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserResponse"
+                    },
+                    "token": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "user",
+                    "token"
+                ]
+            }
+        }
+    }
+}
