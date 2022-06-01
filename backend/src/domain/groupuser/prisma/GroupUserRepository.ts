@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { PRISMA_CLIENT } from "@constants/application";
 import { PrismaClient, GroupUser, InviteStatus } from "@prisma/client";
 
+import IGroupParticipant from "../http/dtos/IGroupParticipant";
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
 
 @injectable()
@@ -63,10 +64,19 @@ class GroupUserRepository implements IGroupUserRepository {
         });
     }
 
-    public async getByGroup(group_id: string): Promise<GroupUser[]> {
+    public async getByGroup(group_id: string): Promise<IGroupParticipant[]> {
         return this.prisma.groupUser.findMany({
             where: {
                 group_id,
+            },
+            select: {
+                group_id: true,
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
             },
         });
     }

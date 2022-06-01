@@ -72,12 +72,12 @@ class GroupUserService {
         const groupUsers = await this.repository.getByGroup(group_id);
 
         const unselectedUsers = groupUsers.map(
-            (groupUser) => groupUser.user_id
+            (groupUser) => groupUser.user.id
         );
         const selectedUsers = new Map(
             groupUsers.map((groupUser) => {
                 const selectedUserId = unselectedUsers.pop();
-                return [groupUser.user_id, selectedUserId || ""];
+                return [groupUser.user.id, selectedUserId || ""];
             })
         );
 

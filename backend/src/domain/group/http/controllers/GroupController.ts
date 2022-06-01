@@ -14,10 +14,9 @@ export default class GroupController {
         const groupService = container.resolve(GroupService);
 
         const requestModel: ICreateGroupRequest = request.body;
+        const { token } = request.body;
 
-        // requestModel.created_by = loggeduserid
-
-        const group = await groupService.create(requestModel);
+        const group = await groupService.create(requestModel, token);
 
         return response.status(HttpStatus.CREATED).json(group);
     }
@@ -29,11 +28,23 @@ export default class GroupController {
         const groupService = container.resolve(GroupService);
 
         const requestModel: IUpdateGroupRequest = request.body;
-        
-        // requestModel.created_by = loggeduserid
+        const { token } = request.body;
 
-        const group = await groupService.update(requestModel);
+        const group = await groupService.update(requestModel, token);
 
         return response.status(HttpStatus.CREATED).json(group);
+    }
+
+    public async getUserGroups(
+        request: Request,
+        response: Response
+    ): Promise<Response> {
+        const groupService = container.resolve(GroupService);
+
+        const { token } = request.body;
+
+        const groups = await groupService.getByUser(token);
+
+        return response.status(HttpStatus.OK).json(groups);
     }
 }
