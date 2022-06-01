@@ -29,3 +29,9 @@ export const INCORRECT_CREDENTIALS_TITLE = "Email e/ou senha incorretos";
 export const INCORRECT_CREDENTIALS_DETAIL =
     "As credenciais informadas não correspondem";
 export const INCORRECT_CREDENTIALS_INSTACE = "user/post/session";
+
+export const USER_UNAUTHORIZED_TYPE = "user.operation.credentials";
+export const USER_UNAUTHORIZED_TITLE = "Usuário não autorizado";
+export const USER_UNAUTHORIZED_DETAIL =
+    "O usuário não tem permissão para realizar a operação com os dados fornecidos";
+export const USER_UNAUTHORIZED_INSTANCE = "user/operation/credentials";

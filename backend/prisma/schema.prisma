@@ -1,29 +1,64 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id         String    @id @default(uuid())
-    name       String
-    email      String    @unique
-    password   String
-    created_at DateTime  @default(now())
-    updated_at DateTime?
+  id         String    @id @default(uuid())
+  name       String
+  email      String    @unique
+  password   String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
 
-    @@map("user")
+  @@map("user")
+  GroupUser GroupUser[]
+  Group Group[]
 }
 
 model UserToken {
-    id         String    @id @default(uuid())
-    token      String    @default(uuid())
-    user_id    String
-    created_at DateTime  @default(now())
-    updated_at DateTime?
+  id         String    @id @default(uuid())
+  token      String    @default(uuid())
+  user_id    String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
 
-    @@map("user_token")
+  @@map("user_token")
+}
+
+model Group {
+  id         String    @id @default(uuid())
+  name       String
+  event_date DateTime?
+  gift_value Int?
+  user       User      @relation(fields: [created_by], references: [id])
+  created_by String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+
+  @@map("group")
+  GroupUser GroupUser[]
+}
+
+model GroupUser {
+  group            Group        @relation(fields: [group_id], references: [id])
+  group_id         String
+  user             User         @relation(fields: [user_id], references: [id])
+  user_id          String
+  status           InviteStatus @default(PENDING)
+  selected_user_id String?
+  created_at       DateTime     @default(now())
+
+  @@id([group_id, user_id])
+  @@map("group_user")
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
 }
