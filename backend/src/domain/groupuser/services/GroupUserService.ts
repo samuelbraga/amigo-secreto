@@ -4,11 +4,9 @@ import { inject, injectable } from "tsyringe";
 import {
     GROUP_REPOSITORY,
     GROUP_USER_REPOSITORY,
-    USER_TOKEN_REPOSITORY,
 } from "@constants/application";
 import * as messages from "@constants/messages";
 import IGroupRepository from "@domain/group/repositories/IGroupRepository";
-import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import { GroupUser } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 import getUserIdFromToken from "@shared/session/session";
@@ -24,10 +22,7 @@ class GroupUserService {
         private readonly repository: IGroupUserRepository,
 
         @inject(GROUP_REPOSITORY)
-        private readonly groupRepository: IGroupRepository,
-
-        @inject(USER_TOKEN_REPOSITORY)
-        private readonly userTokenRepository: IUserTokenRepository
+        private readonly groupRepository: IGroupRepository
     ) {}
 
     public async invite(

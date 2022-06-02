@@ -1,12 +1,8 @@
 import HttpStatus from "http-status-codes";
 import { inject, injectable } from "tsyringe";
 
-import {
-    GROUP_REPOSITORY,
-    USER_TOKEN_REPOSITORY,
-} from "@constants/application";
+import { GROUP_REPOSITORY } from "@constants/application";
 import * as messages from "@constants/messages";
-import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import { Group } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 import getUserIdFromToken from "@shared/session/session";
@@ -19,10 +15,7 @@ import IGroupRepository from "../repositories/IGroupRepository";
 class GroupService {
     constructor(
         @inject(GROUP_REPOSITORY)
-        private readonly repository: IGroupRepository,
-
-        @inject(USER_TOKEN_REPOSITORY)
-        private readonly userTokenRepository: IUserTokenRepository
+        private readonly repository: IGroupRepository
     ) {}
 
     public async create(
