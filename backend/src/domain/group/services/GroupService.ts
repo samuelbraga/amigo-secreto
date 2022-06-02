@@ -9,6 +9,7 @@ import * as messages from "@constants/messages";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import { Group } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
+import getUserIdFromToken from "@shared/session/session";
 
 import ICreateGroupRequest from "../http/dtos/ICreateGroupRequest";
 import IUpdateGroupRequest from "../http/dtos/IUpdateGroupRequest";
@@ -28,9 +29,9 @@ class GroupService {
         { name, gift_value, event_date }: ICreateGroupRequest,
         token: string
     ): Promise<Group> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+        const user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!user_id) {
             throw this.createExceptionBase();
         }
 
@@ -40,7 +41,7 @@ class GroupService {
                 gift_value,
                 event_date,
             },
-            userToken.user_id
+            user_id
         );
     }
 
@@ -48,23 +49,23 @@ class GroupService {
         group: IUpdateGroupRequest,
         token: string
     ): Promise<Group | null> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+        const user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!user_id) {
             throw this.createExceptionBase();
         }
 
-        return this.repository.update(group, userToken.user_id);
+        return this.repository.update(group, user_id);
     }
 
     public async getByUser(token: string): Promise<Group[]> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+        const user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!user_id) {
             throw this.createExceptionBase();
         }
 
-        return this.repository.getByUser(userToken.user_id);
+        return this.repository.getByUser(user_id);
     }
 
     private createExceptionBase(): ExceptionBase {

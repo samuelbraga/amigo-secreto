@@ -1346,17 +1346,17 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@prisma/client@^3.13.0-dev.29":
-  "integrity" "sha512-9wrNZISTySUzVDObIqgbTfFQ54GQx0yE/LAP1uur21dpDGfAAGLyuOKMXNjuejELvpHAuqu1sE5OFVVFQVCp5w=="
-  "resolved" "https://registry.npmjs.org/@prisma/client/-/client-3.13.0-dev.29.tgz"
-  "version" "3.13.0-dev.29"
+"@prisma/client@^3.15.0-dev.33":
+  "integrity" "sha512-dV8v7gX6bfwHFzug5HCBL8rLLfbiBtEv2KE2LKQZ2hHY2+XpUL68qOYHLNk4ziMDsdx3iqYaYeK913kBYqXeRw=="
+  "resolved" "https://registry.npmjs.org/@prisma/client/-/client-3.15.0-integration-tweak-ci.5.tgz"
+  "version" "3.15.0-integration-tweak-ci.5"
   dependencies:
-    "@prisma/engines-version" "3.13.0-11.07815b335736eb128666b4a5a86e94e19656f4ff"
+    "@prisma/engines-version" "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a"
 
-"@prisma/engines-version@3.13.0-11.07815b335736eb128666b4a5a86e94e19656f4ff":
-  "integrity" "sha512-9lxI8l5rxrOt0pvX15F4WPHkZYeynqbaFkTvWS8XCm3QqsAkM4hLa2L5iysnM/dmLIhHqbqWOGFjgZHB0sFl5w=="
-  "resolved" "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-3.13.0-11.07815b335736eb128666b4a5a86e94e19656f4ff.tgz"
-  "version" "3.13.0-11.07815b335736eb128666b4a5a86e94e19656f4ff"
+"@prisma/engines-version@3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a":
+  "integrity" "sha512-D+yHzq4a2r2Rrd0ZOW/mTZbgDIkUkD8ofKgusEI1xPiZz60Daks+UM7Me2ty5FzH3p/TgyhBpRrfIHx+ha20RQ=="
+  "resolved" "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a.tgz"
+  "version" "3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a"
 
 "@prisma/engines@3.13.0-11.07815b335736eb128666b4a5a86e94e19656f4ff":
   "integrity" "sha512-JEHHPsiMEaGwo+MiQvU0yakb0enARgKHE/khcCqvWlAb4os+IHl1qs4M5I23YMkvJtui5eKRwLTQ4sZ9MoM8TA=="

@@ -4,6 +4,7 @@ import { PRISMA_CLIENT } from "@constants/application";
 import { PrismaClient, GroupUser, InviteStatus } from "@prisma/client";
 
 import IGroupParticipant from "../http/dtos/IGroupParticipant";
+import ISelfGroupUser from "../http/dtos/ISelfGroupUser";
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
 
 @injectable()
@@ -56,10 +57,20 @@ class GroupUserRepository implements IGroupUserRepository {
         );
     }
 
-    public async getByUser(user_id: string): Promise<GroupUser[]> {
+    public async getByUser(user_id: string): Promise<ISelfGroupUser[]> {
         return this.prisma.groupUser.findMany({
             where: {
                 user_id,
+            },
+            select: {
+                group_id: true,
+                status: true,
+                selected_user: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
             },
         });
     }
@@ -67,7 +78,10 @@ class GroupUserRepository implements IGroupUserRepository {
     public async getByGroup(group_id: string): Promise<IGroupParticipant[]> {
         return this.prisma.groupUser.findMany({
             where: {
-                group_id,
+                AND: {
+                    group_id,
+                    status: InviteStatus.ACCEPTED,
+                },
             },
             select: {
                 group_id: true,

@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { PRISMA_CLIENT } from "@constants/application";
-import { PrismaClient, Group } from "@prisma/client";
+import { PrismaClient, Group, InviteStatus } from "@prisma/client";
 
 import ICreateGroupRequest from "../http/dtos/ICreateGroupRequest";
 import IUpdateGroupRequest from "../http/dtos/IUpdateGroupRequest";
@@ -26,6 +26,13 @@ class GroupRepository implements IGroupRepository {
                 event_date,
                 gift_value,
                 created_by,
+            },
+        });
+        await this.prisma.groupUser.create({
+            data: {
+                status: InviteStatus.ACCEPTED,
+                group_id: group.id,
+                user_id: created_by,
             },
         });
 

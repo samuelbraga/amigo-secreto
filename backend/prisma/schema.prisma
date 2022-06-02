@@ -15,9 +15,10 @@ model User {
   created_at DateTime  @default(now())
   updated_at DateTime?
 
+  GroupUser         GroupUser[] @relation(name: "GroupUser")
+  SelectedGroupUser GroupUser[] @relation(name: "SelectedGroupUser")
+  Group             Group[]
   @@map("user")
-  GroupUser GroupUser[]
-  Group Group[]
 }
 
 model UserToken {
@@ -40,16 +41,17 @@ model Group {
   created_at DateTime  @default(now())
   updated_at DateTime?
 
-  @@map("group")
   GroupUser GroupUser[]
+  @@map("group")
 }
 
 model GroupUser {
   group            Group        @relation(fields: [group_id], references: [id])
   group_id         String
-  user             User         @relation(fields: [user_id], references: [id])
+  user             User         @relation(name: "GroupUser", fields: [user_id], references: [id])
   user_id          String
   status           InviteStatus @default(PENDING)
+  selected_user    User?        @relation(name: "SelectedGroupUser", fields: [selected_user_id], references: [id])
   selected_user_id String?
   created_at       DateTime     @default(now())
 

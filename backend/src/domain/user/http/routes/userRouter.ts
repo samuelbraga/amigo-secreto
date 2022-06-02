@@ -4,11 +4,11 @@ import { Router } from "express";
 
 import UserController from "../controllers/UserController";
 
-const userRoutes = Router();
+const userRouter = Router();
 
 const userController = new UserController();
 
-userRoutes.post(
+userRouter.post(
     "/",
     celebrate({
         [Segments.BODY]: {
@@ -20,4 +20,4 @@ userRoutes.post(
     userController.createUser
 );
 
-export default userRoutes;
+export default userRouter;

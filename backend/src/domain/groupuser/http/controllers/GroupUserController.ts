@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 
 import GroupUserService from "../../services/GroupUserService";
 
-export default class GroupController {
+export default class GroupUserController {
     public async invite(
         request: Request,
         response: Response
@@ -39,8 +39,21 @@ export default class GroupController {
 
         const { token } = request.body;
 
-        const userGroup = await groupUserService.getByUser(token);
+        const userGroups = await groupUserService.getByUser(token);
 
-        return response.status(HttpStatus.OK).json(userGroup);
+        return response.status(HttpStatus.OK).json(userGroups);
+    }
+
+    public async getByGroup(
+        request: Request,
+        response: Response
+    ): Promise<Response> {
+        const groupUserService = container.resolve(GroupUserService);
+
+        const { group_id, token } = request.body;
+
+        const participants = await groupUserService.getByGroup(group_id, token);
+
+        return response.status(HttpStatus.OK).json(participants);
     }
 }

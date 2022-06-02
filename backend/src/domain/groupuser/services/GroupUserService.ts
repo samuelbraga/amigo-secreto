@@ -11,7 +11,10 @@ import IGroupRepository from "@domain/group/repositories/IGroupRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import { GroupUser } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
+import getUserIdFromToken from "@shared/session/session";
 
+import IGroupParticipant from "../http/dtos/IGroupParticipant";
+import ISelfGroupUser from "../http/dtos/ISelfGroupUser";
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
 
 @injectable()
@@ -32,14 +35,14 @@ class GroupUserService {
         user_id: string,
         token: string
     ): Promise<GroupUser> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+        const token_user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!token_user_id) {
             throw this.createExceptionBase();
         }
 
         const group = this.groupRepository.getByUserAdmin(
-            userToken.user_id,
+            token_user_id,
             group_id
         );
 
@@ -54,14 +57,14 @@ class GroupUserService {
         group_id: string,
         token: string
     ): Promise<GroupUser[]> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+        const token_user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!token_user_id) {
             throw this.createExceptionBase();
         }
 
         const group = this.groupRepository.getByUserAdmin(
-            userToken.user_id,
+            token_user_id,
             group_id
         );
 
@@ -84,13 +87,31 @@ class GroupUserService {
         return this.repository.saveSelected(group_id, selectedUsers);
     }
 
-    public async getByUser(token: string): Promise<GroupUser[]> {
-        const userToken = await this.userTokenRepository.findByToken(token);
+    public async getByUser(token: string): Promise<ISelfGroupUser[]> {
+        const token_user_id = getUserIdFromToken(token);
 
-        if (!userToken) {
+        if (!token_user_id) {
             throw this.createExceptionBase();
         }
-        return this.repository.getByUser(userToken.user_id);
+        return this.repository.getByUser(token_user_id);
+    }
+
+    public async getByGroup(
+        group_id: string,
+        token: string
+    ): Promise<IGroupParticipant[]> {
+        const token_user_id = getUserIdFromToken(token);
+
+        if (!token_user_id) {
+            throw this.createExceptionBase();
+        }
+        const groups = await this.repository.getByUser(token_user_id);
+
+        if (!groups.map((group) => group.group_id).includes(group_id)) {
+            return Promise.resolve([]);
+        }
+
+        return this.repository.getByGroup(group_id);
     }
 
     private createExceptionBase(): ExceptionBase {
