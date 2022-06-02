@@ -1,29 +1,66 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id         String    @id @default(uuid())
-    name       String
-    email      String    @unique
-    password   String
-    created_at DateTime  @default(now())
-    updated_at DateTime?
+  id         String    @id @default(uuid())
+  name       String
+  email      String    @unique
+  password   String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
 
-    @@map("user")
+  GroupUser         GroupUser[] @relation(name: "GroupUser")
+  SelectedGroupUser GroupUser[] @relation(name: "SelectedGroupUser")
+  Group             Group[]
+  @@map("user")
 }
 
 model UserToken {
-    id         String    @id @default(uuid())
-    token      String    @default(uuid())
-    user_id    String
-    created_at DateTime  @default(now())
-    updated_at DateTime?
+  id         String    @id @default(uuid())
+  token      String    @default(uuid())
+  user_id    String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
 
-    @@map("user_token")
+  @@map("user_token")
+}
+
+model Group {
+  id         String    @id @default(uuid())
+  name       String
+  event_date DateTime?
+  gift_value Int?
+  user       User      @relation(fields: [created_by], references: [id])
+  created_by String
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+
+  GroupUser GroupUser[]
+  @@map("group")
+}
+
+model GroupUser {
+  group            Group        @relation(fields: [group_id], references: [id])
+  group_id         String
+  user             User         @relation(name: "GroupUser", fields: [user_id], references: [id])
+  user_id          String
+  status           InviteStatus @default(PENDING)
+  selected_user    User?        @relation(name: "SelectedGroupUser", fields: [selected_user_id], references: [id])
+  selected_user_id String?
+  created_at       DateTime     @default(now())
+
+  @@id([group_id, user_id])
+  @@map("group_user")
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
 }
