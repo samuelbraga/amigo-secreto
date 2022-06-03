@@ -18,7 +18,7 @@ class FakeUsersRepository implements IUsersRepository {
         return findUser;
     }
 
-    public async save({ name, email, password }: User): Promise<User> {    
+    public async save({ name, email, password }: User): Promise<User> {
         const user: User = {
             id: v4(),
             name,

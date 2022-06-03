@@ -69,10 +69,47 @@
                     }
                 }
             }
+        },
+        "/password/forgot": {
+            "post": {
+                "description": "Create a token for auth user to reset your password",
+                "summary": "Create a token form reset password",
+                "operationId": "createResetPasswordToken",
+                "parameters": [
+                    {
+                        "$ref": "#/components/schemas/EmailHeader"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Created reset password token"
+                    },
+                    "404": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionBase"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "EmailHeader": {
+                "name": "email",
+                "in": "header",
+                "description": "User email",
+                "example": "foo.bar@example.com",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
             "CreateUserRequest": {
                 "type": "object",
                 "properties": {
@@ -158,6 +195,31 @@
                     "user",
                     "token"
                 ]
+            },
+            "ExceptionBase": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "domain"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Title of exception"
+                    },
+                    "status": {
+                        "type": "number",
+                        "example": "404"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "example": "Detail of exception"
+                    },
+                    "instance": {
+                        "type": "string",
+                        "example": "Instance of error"
+                    }
+                }
             }
         }
     }

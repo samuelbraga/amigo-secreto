@@ -12,11 +12,11 @@ const resetPasswordController = new ResetPasswordController();
 passwordRouter.post(
     "/forgot",
     celebrate({
-        [Segments.BODY]: {
+        [Segments.HEADERS]: {
             email: Joi.string().email().required(),
         },
     }),
-    forgotPasswordController.create
+    forgotPasswordController.createResetPasswordToken
 );
 
 passwordRouter.post(
