@@ -27,19 +27,19 @@ describe("CreateUser", () => {
         expect(user).toHaveProperty("id");
     });
 
-    it('should not be able to create a new user with existing email', async () => {
-      await createUserService.execute({
-        name: 'Foo Bar',
-        email: 'foo.bar@example.com',
-        password: '123456',
-      });
+    it("should not be able to create a new user with existing email", async () => {
+        await createUserService.execute({
+            name: "Foo Bar",
+            email: "foo.bar@example.com",
+            password: "123456",
+        });
 
-      await expect(
-        createUserService.execute({
-          name: 'Foo Bar',
-          email: 'foo.bar@example.com',
-          password: '123456',
-        }),
-      ).rejects.toBeInstanceOf(Error);
+        await expect(
+            createUserService.execute({
+                name: "Foo Bar",
+                email: "foo.bar@example.com",
+                password: "123456",
+            })
+        ).rejects.toBeInstanceOf(Error);
     });
 });
