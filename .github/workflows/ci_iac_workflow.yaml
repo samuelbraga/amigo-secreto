@@ -6,28 +6,13 @@ on:
       - 'iac/**'
   
 jobs:
-  replcace:
-    name: "Replace"
+  terraform:
+    name: 'Terrafom'
     runs-on: ubuntu-latest
 
     env:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Replace values
-        id: replace
-        run: cd iac && cat backend_task_definition.tf && envsubst < backend_task_definition.tf                                                                                                                                               [ter 07 jun 2022 17:30:00]
-          # rm backend_task_definition.tf                                                                                                                                                                                       [ter 07 jun 2022 17:30:04]
-          # mv backend_task_definition.tf2 backend_task_definition.tf
-  
-  terraform:
-    name: 'Terrafom'
-    runs-on: ubuntu-latest
-    needs: replcace
 
     defaults:
       run:
@@ -36,6 +21,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+
+      - name: Replace values
+        id: replace
+        run: |
+          sed -i -e "s/{{JWT_SECRET}}/$JWT_SECRET/g" iac/backend_task_definition.tf                                                                                                                                             [ter 07 jun 2022 17:30:00]
+          sed -i -e "s/{{DATABASE_URL}}/$DATABASE_URL/g" iac/backend_task_definition.tf   
 
       - name: AWS Configure
         uses: aws-actions/configure-aws-credentials@v1

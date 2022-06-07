@@ -27,11 +27,11 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           "name": "JWT_SECRET",
-          "value": "${JWT_SECRET}"
+          "value": "{{JWT_SECRET}}"
         },
         {
           "name": "DATABASE_URL",
-          "value": "${DATABASE_URL}"
+          "value": "{{DATABASE_URL}}"
         }
       ],
       "networkMode": "awsvpc",
