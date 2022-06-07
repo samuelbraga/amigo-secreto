@@ -11,6 +11,7 @@ module.exports = {
                     "@domain": "./src/domain",
                     "@config": "./src/config",
                     "@shared": "./src/shared",
+                    "@constants": "./src/constants"
                 },
             },
         ],
