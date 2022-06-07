@@ -3,7 +3,7 @@ module "cluster" {
 
   name           = "amigo-oculto"
   engine         = "aurora-postgresql"
-  engine_version = "11.12"
+  engine_version = "13.6"
   instance_class = "db.t4g.small"
   instances = {
     one = {}
@@ -20,9 +20,6 @@ module "cluster" {
   storage_encrypted   = true
   apply_immediately   = true
   monitoring_interval = 10
-
-  db_parameter_group_name         = "default"
-  db_cluster_parameter_group_name = "default"
 
   enabled_cloudwatch_logs_exports = ["postgresql"]
 
