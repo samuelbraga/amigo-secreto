@@ -27,11 +27,11 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           "name": "JWT_SECRET",
-          "value": "${JWT_SECRET}"
+          "value": "secret"
         },
         {
           "name": "DATABASE_URL",
-          "value": "${DATABASE_URL}"
+          "value": "postgresql://postgres:pds&mulambo@amigo-oculto.cucmqb5hmfkv.us-east-2.rds.amazonaws.com:5432/amigo_oculto"
         }
       ],
       "networkMode": "awsvpc",
