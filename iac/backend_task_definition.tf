@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "backend" {
-  family                   = "amigo-oculto"
+  family                   = "amigo-oculto-backend"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 256

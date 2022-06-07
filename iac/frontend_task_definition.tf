@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "frontend" {
-  family                   = "amigo-oculto"
+  family                   = "amigo-oculto-frontend"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 256
