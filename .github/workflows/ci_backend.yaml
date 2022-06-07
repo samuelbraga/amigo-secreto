@@ -13,8 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-        run: |
-          cd backend
+       
+      - name: Access Source directory
+        run: cd backend
       
       - uses: actions/setup-node@v3
         with:
