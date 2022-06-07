@@ -25,8 +25,8 @@ jobs:
       - name: Replace values
         id: replace
         run: |
-          sed -i -e "s/{{JWT_SECRET}}/$JWT_SECRET/g" iac/backend_task_definition.tf                                                                                                                                             [ter 07 jun 2022 17:30:00]
-          sed -i -e "s/{{DATABASE_URL}}/$DATABASE_URL/g" iac/backend_task_definition.tf   
+          sed -i -e "s/{{JWT_SECRET}}/$JWT_SECRET/g" backend_task_definition.tf                                                                                                                                             [ter 07 jun 2022 17:30:00]
+          sed -i -e "s/{{DATABASE_URL}}/$DATABASE_URL/g" backend_task_definition.tf   
 
       - name: AWS Configure
         uses: aws-actions/configure-aws-credentials@v1
