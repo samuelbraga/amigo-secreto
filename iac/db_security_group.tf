@@ -1,7 +1,7 @@
 module "db_security_group" {
   source = "terraform-aws-modules/security-group/aws"
 
-  name        = "${var.name}-master"
+  name        = "db-amigo-oculto"
   description = "Security Group para o banco de dados"
 
   vpc_id = module.vpc.vpc_id
