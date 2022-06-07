@@ -7,6 +7,8 @@ on:
 
 env:
   tf_actions_working_dir: 'iac'
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
   
 jobs:
   terraform:
@@ -34,13 +36,9 @@ jobs:
 
       - name: Replace values
         id: replcare
-        run: |
-          envsubst < backend_task_definition.tf > backend_task_definition.tf2                                                                                                                                                  [ter 07 jun 2022 17:30:00]
-          rm backend_task_definition.tf                                                                                                                                                                                        [ter 07 jun 2022 17:30:04]
-          mv backend_task_definition.tf2 backend_task_definition.tf
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: envsubst < backend_task_definition.tf > backend_task_definition.tf2                                                                                                                                                  [ter 07 jun 2022 17:30:00]
+          # rm backend_task_definition.tf                                                                                                                                                                                       [ter 07 jun 2022 17:30:04]
+          # mv backend_task_definition.tf2 backend_task_definition.tf
 
       - name: Terraform fmt
         id: fmt
