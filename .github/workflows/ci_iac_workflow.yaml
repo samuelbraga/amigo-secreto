@@ -20,12 +20,9 @@ jobs:
 
       - name: Replace values
         id: replace
-        run: |
-          ls
-          cd iac
-          envsubst < backend_task_definition.tf                                                                                                                                               [ter 07 jun 2022 17:30:00]
-          rm backend_task_definition.tf                                                                                                                                                                                       [ter 07 jun 2022 17:30:04]
-          mv backend_task_definition.tf2 backend_task_definition.tf
+        run: cd iac && cat backend_task_definition.tf && envsubst < backend_task_definition.tf                                                                                                                                               [ter 07 jun 2022 17:30:00]
+          # rm backend_task_definition.tf                                                                                                                                                                                       [ter 07 jun 2022 17:30:04]
+          # mv backend_task_definition.tf2 backend_task_definition.tf
   
   terraform:
     name: 'Terrafom'
