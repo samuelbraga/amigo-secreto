@@ -12,6 +12,7 @@
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "lint": "eslint --fix --ext .ts src/",
     "migrate": "prisma db push",
+    "generate": "prisma generate",
     "test": "jest"
   },
   "dependencies": {
