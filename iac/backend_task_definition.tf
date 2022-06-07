@@ -38,8 +38,8 @@ resource "aws_ecs_task_definition" "backend" {
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "${aws_cloudwatch_log_group.logs.name}",
-          "awslogs-region": "${var.aws_region}",
+          "awslogs-group": "amigo-oculto",
+          "awslogs-region": "us-east-2",
           "awslogs-stream-prefix": "ecs"
         }
       }

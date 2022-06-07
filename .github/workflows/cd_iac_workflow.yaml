@@ -35,10 +35,12 @@ jobs:
       - name: Replace values
         id: replcare
         run: |
-          echo $JWT_SECRET
           envsubst < backend_task_definition.tf > backend_task_definition.tf2                                                                                                                                                  [ter 07 jun 2022 17:30:00]
           rm backend_task_definition.tf                                                                                                                                                                                        [ter 07 jun 2022 17:30:04]
           mv backend_task_definition.tf2 backend_task_definition.tf
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Terraform fmt
         id: fmt
