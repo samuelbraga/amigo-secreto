@@ -32,6 +32,13 @@ jobs:
       - name: SetUp Terraform
         uses: hashicorp/setup-terraform@v2
 
+      - name: Replace values
+        id: replcare
+        run: envsubst < backend_task_definition.tf > backend_task_definition.tf
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check

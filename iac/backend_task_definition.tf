@@ -16,6 +16,24 @@ resource "aws_ecs_task_definition" "backend" {
           "hostPort": 80
         }
       ],
+      "environment": [
+        {
+          "name": "BASE_URL",
+          "value": "api.mumuz.in"
+        },
+        {
+          "name": "POSRT",
+          "value": "80"
+        },
+        {
+          "name": "JWT_SECRET",
+          "value": "${JWT_SECRET}"
+        },
+        {
+          "name": "DATABASE_URL",
+          "value": "${DATABASE_URL}"
+        }
+      ],
       "networkMode": "awsvpc",
       "logConfiguration": {
         "logDriver": "awslogs",
