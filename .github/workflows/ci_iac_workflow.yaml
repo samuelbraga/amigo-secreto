@@ -5,7 +5,7 @@ on:
     paths:
       - 'iac/**'
   
-jobs:
+jobs:      
   terraform:
     name: 'Terrafom'
     runs-on: ubuntu-latest
@@ -25,9 +25,10 @@ jobs:
       - name: Replace values
         id: replace
         run: |
-          sed -i -e "s/{{JWT_SECRET}}/${{ secrets.JWT_SECRET }}/g" backend_task_definition.tf                                                                                                                                             [ter 07 jun 2022 17:30:00]
-          sed -i -e "s/{{DATABASE_URL}}/${{ secrets.DATABASE_URL }}/g" backend_task_definition.tf   
-
+          envsubst < backend_task_definition.tf 
+          rm backend_task_definition.tf
+          mv backend_task_definition.tf2 backend_task_definition.tf
+  
       - name: AWS Configure
         uses: aws-actions/configure-aws-credentials@v1
         with:
