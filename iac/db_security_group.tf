@@ -8,7 +8,7 @@ module "db_security_group" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port   = 0
+      from_port   = 5432
       to_port     = 5432
       protocol    = "tcp"
       cidr_blocks = "10.0.0.0/16"
