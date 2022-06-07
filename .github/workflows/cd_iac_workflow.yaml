@@ -4,26 +4,30 @@ on:
       - main
     paths:
       - 'iac/**'
-
-env:
-  tf_actions_working_dir: 'iac'
   
 jobs:
   terraform:
     name: 'Terrafom'
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ${{ env.tf_actions_working_dir }}
-
     env:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
+    defaults:
+      run:
+        working-directory: 'iac'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+
+      - name: Replace values
+        id: replace
+        run: |
+          envsubst < backend_task_definition.tf > backend_task_definition.tf2
+          rm backend_task_definition.tf
+          mv backend_task_definition.tf2 backend_task_definition.tf
 
       - name: AWS Configure
         uses: aws-actions/configure-aws-credentials@v1
@@ -35,13 +39,6 @@ jobs:
       
       - name: SetUp Terraform
         uses: hashicorp/setup-terraform@v2
-
-      - name: Replace values
-        id: replcare
-        run: |
-          envsubst < backend_task_definition.tf > backend_task_definition.tf2                                                                                                                                                  [ter 07 jun 2022 17:30:00]
-          rm backend_task_definition.tf                                                                                                                                                                                        [ter 07 jun 2022 17:30:04]
-          mv backend_task_definition.tf2 backend_task_definition.tf
 
       - name: Terraform fmt
         id: fmt

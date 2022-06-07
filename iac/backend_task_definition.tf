@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "backend" {
           "value": "api.mumuz.in"
         },
         {
-          "name": "POSRT",
+          "name": "PORT",
           "value": "80"
         },
         {
