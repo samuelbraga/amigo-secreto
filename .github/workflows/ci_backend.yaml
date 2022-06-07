@@ -4,7 +4,7 @@ on:
       - 'backend/**'
   
 env:
-  tf_actions_working_dir: 'backend'
+  actions_working_dir: 'backend'
 
 jobs:
   backend:
@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }}
+        working-directory: ${{ env.actions_working_dir }}
 
     steps:
       - name: Checkout
