@@ -9,7 +9,7 @@
             "description": "Development server"
         },
         {
-            "url": "https://api.mumuz.in/v1",
+            "url": "http://api.mumuz.in/v1",
             "description": "Production server"
         }
     ],
