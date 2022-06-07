@@ -24,9 +24,9 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Replace values
-        id: replcare
+        id: replace
         run: |
-          cd iac
+          ls
           envsubst < backend_task_definition.tf                                                                                                                                               [ter 07 jun 2022 17:30:00]
           rm backend_task_definition.tf                                                                                                                                                                                       [ter 07 jun 2022 17:30:04]
           mv backend_task_definition.tf2 backend_task_definition.tf
