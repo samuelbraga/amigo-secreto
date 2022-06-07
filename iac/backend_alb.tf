@@ -22,7 +22,7 @@ resource "aws_lb_target_group" "backend" {
     healthy_threshold   = 5
     unhealthy_threshold = 5
     interval            = 60
-    path                = "/"
+    path                = "/api-docs"
   }
 
   tags = {

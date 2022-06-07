@@ -30,3 +30,19 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/amigo-oculto-backend:${{ github.sha }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: amigo-oculto-backend
+          image: ${{ secrets.DOCKER_HUB_USERNAME }}/amigo-oculto-backend:${{ github.sha }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: backend
+          cluster: amigo-oculto
+          wait-for-service-stability: true
