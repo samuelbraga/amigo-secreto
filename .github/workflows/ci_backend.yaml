@@ -4,22 +4,17 @@ on:
       - main
     paths:
       - 'backend/**'
-  
-env:
-  actions_working_dir: 'backend'
 
 jobs:
   backend:
     name: 'Backend'
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ${{ env.actions_working_dir }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        run: |
+          cd backend
       
       - uses: actions/setup-node@v3
         with:
