@@ -4,15 +4,15 @@ on:
       - main
     paths:
       - 'iac/**'
-
-env:
-  JWT_SECRET: ${{ secrets.JWT_SECRET }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
   
 jobs:
   replcace:
     name: "Replace"
     runs-on: ubuntu-latest
+
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: Checkout
