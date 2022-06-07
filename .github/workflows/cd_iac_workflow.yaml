@@ -1,0 +1,56 @@
+on:
+  push:
+    branches:    
+      - main
+    paths:
+      - 'iac/**'
+
+env:
+  tf_actions_working_dir: 'iac'
+  
+jobs:
+  terraform:
+    name: 'Terrafom'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: AWS Configure
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+          role-duration-seconds: 1200
+      
+      - name: SetUp Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config=backend.config
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: true
+      
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -no-color
+        continue-on-error: true
