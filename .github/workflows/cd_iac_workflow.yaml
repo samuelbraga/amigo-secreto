@@ -25,7 +25,7 @@ jobs:
       - name: Replace values
         id: replace
         run: |
-          envsubst < backend_task_definition.tf 
+          envsubst < backend_task_definition.tf > backend_task_definition.tf2
           rm backend_task_definition.tf
           mv backend_task_definition.tf2 backend_task_definition.tf
 
