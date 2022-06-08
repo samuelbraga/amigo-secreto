@@ -34,7 +34,7 @@ export default function SorteioCard({
 
   return (
     <Card sx={{ display: 'flex' }}>
-      <CardContent sx={{ flex: '1 0 auto' }}>
+      <CardContent>
         <Box sx={{ display: 'block'}}>
           <Stack spacing={2} direction="row" sx={{ justifyContent: 'space-between' }}>
             <Typography component="div" variant="h6" textAlign="left">
