@@ -21,7 +21,6 @@ const UserDraw = () => {
       })
   }, []);
 
-  const filtredGroup = groups.filter(group => group.created_by === user.id)
   const formatAdress = (data) => {
     return  `${data.street}, ${data.neighborhood},${data.complement}, ${data.city} -  ${data.state}`
   } 
@@ -34,7 +33,7 @@ const UserDraw = () => {
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        { filtredGroup ? filtredGroup.map((group) => (
+        { groups ? groups.map((group) => (
           <SorteioCard
             adress={formatAdress(group)}
             date={group.event_date}
@@ -43,6 +42,9 @@ const UserDraw = () => {
             price={group.gift_value}
           />
         )): 'Você não possui nenhum sorteio cadastrado'}
+        { !groups.length &&
+          <span>Você não criou nenhum Amigo Secreto.</span> 
+        }
       </Box>
     </Paper>
   );
