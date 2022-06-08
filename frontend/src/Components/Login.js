@@ -37,6 +37,7 @@ function LoginUsuario() {
           var user = {
             'name': response.data.user.name,
             'email': values.email,
+            'id': response.data.user.id,
             'tokenBearer': response.data.token,
           }
           sessionStorage.setItem('user', JSON.stringify(user))
