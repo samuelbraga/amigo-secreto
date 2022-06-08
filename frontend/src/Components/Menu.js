@@ -37,7 +37,7 @@ const ResponsiveAppBar = () => {
             {userName}
           </Typography>
         </Button>
-        <Button variant="text" onClick={() => logout()} style={{ color:"#147A12" }}>
+        <Button variant="text" onClick={() => logout} style={{ color:"#147A12" }}>
           <Logout sx={{ mr: 1 }}/>
           <Link style={{ textDecoration:"none" }} to='../'>Sair</Link>
         </Button>

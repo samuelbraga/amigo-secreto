@@ -26,7 +26,7 @@ const UserDraw = () => {
   } 
 
   return (
-    <Paper sx={{ p: 2 }}>
+    <Paper style={{backgroundColor:"#f8fff7"}} sx={{ p: 2 }}>
       <Box sx={{ display: 'block', my: 2 }}>
         <Typography component="div" variant="h5">
           Meus Amigos Secretos

@@ -4,7 +4,7 @@ import { Typography, Paper } from '@mui/material';
 
 const UserBets = () => {
   return (
-    <Paper sx={{ p: 2 }}>
+    <Paper style={{backgroundColor:"#f8fff7"}} sx={{ p: 2 }}>
       <Typography component="div" variant="h5" sx={{ mb: 2 }}>
         Amigos Secretos que Participo
       </Typography>
