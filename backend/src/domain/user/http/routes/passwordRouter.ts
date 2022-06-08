@@ -30,7 +30,7 @@ passwordRouter.post(
                 .valid(Joi.ref("password")),
         },
     }),
-    resetPasswordController.create
+    resetPasswordController.resetPassword
 );
 
 export default passwordRouter;

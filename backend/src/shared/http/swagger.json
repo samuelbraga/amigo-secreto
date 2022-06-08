@@ -96,6 +96,37 @@
                     }
                 }
             }
+        },
+        "/password/reset": {
+            "post": {
+                "description": "Reset password for an user",
+                "summary": "Reset password",
+                "operationId": "resetPassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Reset Password"
+                    },
+                    "404": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionBase"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -188,12 +219,33 @@
                         "$ref": "#/components/schemas/UserResponse"
                     },
                     "token": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "#%P&pM4z"
                     }
                 },
                 "required": [
                     "user",
                     "token"
+                ]
+            },
+            "ResetPasswordRequest": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "passwordConfirmation": {
+                        "type": "string",
+                        "example": "#%P&pM4z"
+                    }
+                },
+                "required": [
+                    "token",
+                    "password",
+                    "passwordConfirmation"
                 ]
             },
             "ExceptionBase": {

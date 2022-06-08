@@ -2,14 +2,14 @@ resource "aws_ecs_task_definition" "backend" {
   family                   = "amigo-oculto-backend"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 256
-  memory                   = 512
+  cpu                      = 1024
+  memory                   = 2048
   execution_role_arn       = aws_iam_role.ecs_tasks_execution_role.arn
   container_definitions    = <<DEFINITION
   [
     {
       "name": "backend",
-      "image": "nginx",
+      "image": "samuelfantini/amigo-oculto-backend:5f24cfa111124c858b75bd08eec49f52447f49d9",
       "portMappings": [
         {
           "containerPort": 80,

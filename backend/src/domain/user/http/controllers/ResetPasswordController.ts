@@ -5,7 +5,7 @@ import { container } from "tsyringe";
 import ResetPasswordService from "@domain/user/services/ResetPasswordService";
 
 export default class ResetPasswordController {
-    public async create(
+    public async resetPassword(
         request: Request,
         response: Response
     ): Promise<Response> {
