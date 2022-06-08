@@ -16,12 +16,18 @@ resource "aws_ecs_task_definition" "frontend" {
           "hostPort": 80
         }
       ],
+      "environment": [
+        {
+          "name": "API_BASE_URL",
+          "value": "api.mumuz.in"
+        },
+      ],
       "networkMode": "awsvpc",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "${aws_cloudwatch_log_group.logs.name}",
-          "awslogs-region": "${var.aws_region}",
+          "awslogs-group": "amigo-oculto",
+          "awslogs-region": "us-east-2",
           "awslogs-stream-prefix": "ecs"
         }
       }
