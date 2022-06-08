@@ -1,10 +1,11 @@
+import { formatSorteioData } from '../Helpers/Constants'
 import instance from './api'
 
-export const sorteiosAdmin = (
-    userId,
+export const cadastroSorteio = (
+    sorteioData,
     authorization
 ) => {
-    return instance.get(`sorteios-admin?userId=${userId}`, { headers: { Authorization: `Bearer ${authorization}`} })
+    return instance.post('/group', formatSorteioData(sorteioData, authorization))
 }
 
 export const sorteiosParticipante = (
@@ -12,10 +13,4 @@ export const sorteiosParticipante = (
     authorization
 ) => {
     return instance.get(`sorteios-participante?userId=${userId}`, { headers: { Authorization: `Bearer ${authorization}`} })
-}
-
-export const cadastroSorteio = (
-    sorteioData
-) => {
-    return instance.post('cadastro/sorteio', sorteioData)
 }

@@ -7,80 +7,103 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { initialFormValues } from "../Helpers/Constants";
+import Card from '../Assets/Card.png'
+import { cadastroSorteio } from "../Services/sorteios";
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from "../Context/AppContext";
 
 function FormSorteio() {
   const validationCadastroAS = yup.object({
-    nomeSorteio: yup
+    name: yup
       .string('Digite um nome válido')
       .required('O nome é obrigatório.'),
-    dataRealizacao: yup
+    event_date: yup
       .string('Digite uma data válida')
       .required('O data é obrigatória.'),
-    valorMaximo: yup
-      .number('Digite um valor válido')
+    gift_value: yup
+      .string('Digite um valor válido')
       .required('O valor é obrigatório.'),
     cep: yup
-      .number('Digite um CEP válido')
+      .string('Digite um CEP válido')
       .required('O CEP é obrigatório.'),
-    rua: yup
+    street: yup
       .string('Digite uma rua válida')
       .required('A rua é obrigatória.'),
-    numero: yup
-      .number('Digite um número válido')
+    neighborhood: yup
+      .string('Digite um número válido')
       .required('O número é obrigatório.'),
-    cidade: yup
+    city: yup
       .string('Digite uma cidade válida')
       .required('A cidade é obrigatória.'),
-    estado: yup
+    state: yup
       .string('Digite um estado válido')
       .required('O estado é obrigatório.'),
   });
-
+  const navigate = useNavigate();
+  const { setIsVisible, setFeedbackMessage } = React.useContext(AppContext)
+  const userData = JSON.parse(sessionStorage.getItem('user'))
   const formik = useFormik({
     initialValues: initialFormValues,
     validationSchema: validationCadastroAS,
     onSubmit: (values) => {
-      console.log(values, 'valores')
+      cadastroSorteio(values, userData.tokenBearer)
+        .then(() => {
+          setFeedbackMessage('Cadastro efetuado com sucesso!')
+          setIsVisible(true)
+          formik.setValues(initialFormValues)
+            formik.setTouched({}, false)
+          navigate("/dashboard")
+        })
+        .catch((error) => {
+          setFeedbackMessage('Não foi possível efetuar o cadastro')
+          setIsVisible(true)
+        })
+        .finally(() => {
+          setTimeout(function () {
+            setIsVisible(false)
+          }, 3500)
+        })
     },
   })
 
   return (
     <Grid item xs={12} component={Paper} elevation={6} padding="40px 40px" width='80%'>
-      <Typography color="#147A12" variant="h4" gutterBottom>
-        <b>Cadastre o seu Amigo Secreto!</b>
+      <Typography color="#147A12"
+        variant="h4"
+        gutterBottom
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+      >
+        <b>Cadastre o seu Amigo Secreto!</b> <img src={Card} alt="Card" />
       </Typography>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={3} padding="60px" >
+        <Grid container spacing={1} padding="20px" >
           <Grid item xs={12} sm={6}>
             <TextField
               variant="standard"
               margin="normal"
               fullWidth
-              id="nomeSorteio"
-              value={formik.values.nomeSorteio}
+              id="name"
+              value={formik.values.name}
               onChange={formik.handleChange}
               label="Nome do Amigo Secreto *"
-              name="nomeSorteio"
-              autoComplete="nomeSorteio"
+              name="name"
+              autoComplete="name"
               autoFocus
-              error={formik.touched.nomeSorteio && Boolean(formik.errors.nomeSorteio)}
-              helperText={formik.touched.nomeSorteio && formik.errors.nomeSorteio}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              variant="standard"
-              margin="normal"
-              fullWidth
-              id="dataRealizacao"
-              value={formik.values.dataRealizacao}
-              onChange={formik.handleChange}
+            <DateTimePicker
+              id="event_date"
+              name="event_date"
+              error={formik.touched.event_date && Boolean(formik.errors.event_date)}
+              helperText={formik.touched.event_date && formik.errors.event_date}
               label="Data do Amigo Secreto *"
-              name="dataRealizacao"
-              autoComplete="dataRealizacao"
-              autoFocus
-              error={formik.touched.dataRealizacao && Boolean(formik.errors.dataRealizacao)}
-              helperText={formik.touched.dataRealizacao && formik.errors.dataRealizacao}
+              value={formik.values.event_date}
+              onChange={(event) => formik.setFieldValue('event_date', event)}
+              renderInput={(params) => <TextField {...params} variant="standard" margin="normal" fullWidth/>}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -88,15 +111,15 @@ function FormSorteio() {
               variant="standard"
               margin="normal"
               fullWidth
-              id="valorMaximo"
-              value={formik.values.valorMaximo}
+              id="gift_value"
+              value={formik.values.gift_value}
               onChange={formik.handleChange}
               label="Valor Máximo do Sorteio *"
-              name="valorMaximo"
-              autoComplete="valorMaximo"
+              name="gift_value"
+              autoComplete="gift_value"
               autoFocus
-              error={formik.touched.valorMaximo && Boolean(formik.errors.valorMaximo)}
-              helperText={formik.touched.valorMaximo && formik.errors.valorMaximo}
+              error={formik.touched.gift_value && Boolean(formik.errors.gift_value)}
+              helperText={formik.touched.gift_value && formik.errors.gift_value}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -120,15 +143,15 @@ function FormSorteio() {
             variant="standard"
               margin="normal"
               fullWidth
-              id="rua"
-              value={formik.values.rua}
+              id="street"
+              value={formik.values.street}
               onChange={formik.handleChange}
               label="Rua *"
-              name="rua"
-              autoComplete="rua"
+              name="street"
+              autoComplete="street"
               autoFocus
-              error={formik.touched.rua && Boolean(formik.errors.rua)}
-              helperText={formik.touched.rua && formik.errors.rua}
+              error={formik.touched.street && Boolean(formik.errors.street)}
+              helperText={formik.touched.street && formik.errors.street}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -136,15 +159,15 @@ function FormSorteio() {
             variant="standard"
               margin="normal"
               fullWidth
-              id="numero"
-              value={formik.values.numero}
+              id="neighborhood"
+              value={formik.values.neighborhood}
               onChange={formik.handleChange}
               label="Número *"
-              name="numero"
-              autoComplete="numero"
+              name="neighborhood"
+              autoComplete="neighborhood"
               autoFocus
-              error={formik.touched.numero && Boolean(formik.errors.numero)}
-              helperText={formik.touched.numero && formik.errors.numero}
+              error={formik.touched.neighborhood && Boolean(formik.errors.neighborhood)}
+              helperText={formik.touched.neighborhood && formik.errors.neighborhood}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -152,15 +175,15 @@ function FormSorteio() {
             variant="standard"
               margin="normal"
               fullWidth
-              id="complemento"
-              value={formik.values.complemento}
+              id="complement"
+              value={formik.values.complement}
               onChange={formik.handleChange}
               label="Complemento"
-              name="complemento"
-              autoComplete="complemento"
+              name="complement"
+              autoComplete="complement"
               autoFocus
-              error={formik.touched.complemento && Boolean(formik.errors.complemento)}
-              helperText={formik.touched.complemento && formik.errors.complemento}
+              error={formik.touched.complement && Boolean(formik.errors.complement)}
+              helperText={formik.touched.complement && formik.errors.complement}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -168,15 +191,15 @@ function FormSorteio() {
               variant="standard"
               margin="normal"
               fullWidth
-              id="cidade"
-              value={formik.values.cidade}
+              id="city"
+              value={formik.values.city}
               onChange={formik.handleChange}
               label="Cidade *"
-              name="cidade"
-              autoComplete="cidade"
+              name="city"
+              autoComplete="city"
               autoFocus
-              error={formik.touched.cidade && Boolean(formik.errors.cidade)}
-              helperText={formik.touched.cidade && formik.errors.cidade}
+              error={formik.touched.city && Boolean(formik.errors.city)}
+              helperText={formik.touched.city && formik.errors.city}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -184,15 +207,15 @@ function FormSorteio() {
               variant="standard"
               margin="normal"
               fullWidth
-              id="estado"
-              value={formik.values.estado}
+              id="state"
+              value={formik.values.state}
               onChange={formik.handleChange}
               label="Estado *"
-              name="estado"
-              autoComplete="estado"
+              name="state"
+              autoComplete="state"
               autoFocus
-              error={formik.touched.estado && Boolean(formik.errors.estado)}
-              helperText={formik.touched.estado && formik.errors.estado}
+              error={formik.touched.state && Boolean(formik.errors.state)}
+              helperText={formik.touched.state && formik.errors.state}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -200,15 +223,15 @@ function FormSorteio() {
               variant="standard"
               margin="normal"
               fullWidth
-              id="descricao"
-              value={formik.values.descricao}
+              id="description"
+              value={formik.values.description}
               onChange={formik.handleChange}
               label="Descrição"
-              name="descricao"
-              autoComplete="descricao"
+              name="description"
+              autoComplete="description"
               autoFocus
-              error={formik.touched.descricao && Boolean(formik.errors.descricao)}
-              helperText={formik.touched.descricao && formik.errors.descricao}
+              error={formik.touched.description && Boolean(formik.errors.description)}
+              helperText={formik.touched.description && formik.errors.description}
             />
           </Grid>
           <Grid item xs={12}>

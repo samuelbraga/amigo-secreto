@@ -1,10 +1,14 @@
 import './App.css';
 import Router from './Router/Router'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 function App() {
   return (
     <div className="App">
-      <Router />
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Router />
+      </LocalizationProvider>
     </div>
   );
 }
