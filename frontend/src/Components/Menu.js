@@ -8,7 +8,6 @@ import Logo from '../Assets/AmigoSecreto.png'
 import { AppContext } from '../Context/AppContext'
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-const userName = user['name'];
 
 const ResponsiveAppBar = () => {
   const { setShowLogin } = React.useContext(AppContext)
@@ -16,6 +15,8 @@ const ResponsiveAppBar = () => {
   const isHome = location.pathname == '/';
 
   const renderDashboardMenu = () => {
+    const userName = user ? user['name'] : 'Default';
+
     return (
       <Stack spacing={2} direction="row" sx={{ justifyContent: 'right' }}>
         <Button variant="text" style={{ color:"#147A12" }}>

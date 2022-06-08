@@ -7,12 +7,12 @@ import SorteioCard from '../Components/Card';
 import UserGroup from "../Services/getGroup";
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-const token = user['tokenBearer'];
 
 const UserDraw = () => {
   const [groups, setGroups] = useState('')
 
   useEffect(() => {
+    const token = user ? user['tokenBearer'] : null;
     UserGroup({ token: token })
       .then((res) => {
         console.log(res)
@@ -37,7 +37,7 @@ const UserDraw = () => {
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {groups.map((group) => (
+        { groups ? groups.map((group) => (
           <SorteioCard
             adress={formatAdress(group)}
             date={group.event_date}
@@ -45,7 +45,7 @@ const UserDraw = () => {
             participants={50}
             price={group.gift_value}
           />
-        ))}
+        )): 'Você não possui nenhum sorteio cadastrado'}
       </Box>
     </Paper>
   );
