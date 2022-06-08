@@ -23,6 +23,12 @@ const UserDraw = () => {
       })
   }, []);
 
+  console.log(groups)
+
+  const formatAdress = (data) => {
+    return  `${data.street}, ${data.neighborhood},${data.complement}, ${data.city} -  ${data.state}`
+  } 
+
   return (
     <Paper sx={{ p: 2 }}>
       <Box sx={{ display: 'block', my: 2 }}>
@@ -31,8 +37,15 @@ const UserDraw = () => {
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <SorteioCard />
-        <SorteioCard />
+        {groups.map((group) => (
+          <SorteioCard
+            adress={formatAdress(group)}
+            date={group.event_date}
+            name={group.description}
+            participants={50}
+            price={group.gift_value}
+          />
+        ))}
       </Box>
     </Paper>
   );
