@@ -3,17 +3,19 @@ import HttpStatus from "http-status-codes";
 import { container } from "tsyringe";
 
 import GroupUserService from "../../services/GroupUserService";
+import InviteUserToGroupSerive from "../../services/InviteUserToGroupSerive";
 
 export default class GroupUserController {
-    public async invite(
+    public async inviteUser(
         request: Request,
         response: Response
     ): Promise<Response> {
-        const groupUserService = container.resolve(GroupUserService);
+        const inviteUserToGroupSerive = container.resolve(InviteUserToGroupSerive);
 
-        const { user_id, group_id, token } = request.body;
+        const { user_id: inveted_user_id, group_id } = request.body;
+        const user_id = request.user.id;
 
-        const group = await groupUserService.invite(group_id, user_id, token);
+        const group = await inviteUserToGroupSerive.execute(group_id, inveted_user_id, user_id);
 
         return response.status(HttpStatus.CREATED).json(group);
     }
