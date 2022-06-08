@@ -7,8 +7,8 @@ import { AccountCircle, AddCircle, List, Logout } from '@mui/icons-material';
 import Logo from '../Assets/AmigoSecreto.png'
 import { AppContext } from '../Context/AppContext'
 
-const user = JSON.parse(sessionStorage.getItem('user'));
 const ResponsiveAppBar = () => {
+  const user = JSON.parse(sessionStorage.getItem('user'));
   const { setShowLogin } = React.useContext(AppContext)
   const location = useLocation();
   const isHome = location.pathname === '/';
