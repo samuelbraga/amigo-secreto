@@ -23,7 +23,7 @@ export default function SorteioCard() {
             <Typography component="div" variant="h6" textAlign="left">
               Amigo Secreto - Empresa XPTO
             </Typography>
-            <Edit/>
+            <Edit sx={{ color: "#147A12" }}/>
           </Stack>
         </Box>
         
@@ -35,8 +35,8 @@ export default function SorteioCard() {
         </List>
 
         <Stack spacing={2} direction="row" sx={{ justifyContent: 'right' }}>
-          <Button variant="text">Copiar Link</Button>
-          <Button variant="contained">Ver Mais</Button>
+          <Button variant="text" style={{ color:"#147A12" }}>Copiar Link</Button>
+          <Button variant="contained" style={{ backgroundColor:"#147A12" }}>Ver Mais</Button>
         </Stack>
       </CardContent>
     </Card>
