@@ -106,6 +106,13 @@ class GroupRepository implements IGroupRepository {
 
     public async getByUser(user_id: string): Promise<Group[]> {
         return this.prisma.group.findMany({
+            where: {
+                GroupUser: {
+                    every: {
+                        user_id,
+                    },
+                },
+            },
             include: {
                 GroupUser: {
                     where: {

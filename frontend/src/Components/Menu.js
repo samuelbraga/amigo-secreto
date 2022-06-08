@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useLocation} from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 import {AppBar, Box, Typography, Stack, Toolbar, Container, Button, Tooltip } from '@mui/material'
 import { AccountCircle, AddCircle, List, Logout } from '@mui/icons-material';
@@ -7,24 +7,25 @@ import { AccountCircle, AddCircle, List, Logout } from '@mui/icons-material';
 import Logo from '../Assets/AmigoSecreto.png'
 import { AppContext } from '../Context/AppContext'
 
-const user = JSON.parse(sessionStorage.getItem('user'));
 const ResponsiveAppBar = () => {
+  const user = JSON.parse(sessionStorage.getItem('user'));
   const { setShowLogin } = React.useContext(AppContext)
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const navigate = useNavigate();
 
   const renderDashboardMenu = () => {
-    const userName = user ? user['name'] : 'Default';
+    const userName = user ? user['name'] : null;
 
     return (
       <Stack spacing={2} direction="row" sx={{ justifyContent: 'right' }}>
         <Button variant="text" style={{ color:"#147A12" }}>
           <AddCircle sx={{ mr: 1 }}/>
-          Criar Sorteio
+          <Link style={{ textDecoration:"none" }} to='../novo-amigo-secreto'>Criar Sorteio</Link>
         </Button>
         <Button variant="text" style={{ color:"#147A12" }}>
           <List sx={{ mr: 1 }}/>
-          Meus Sorteios
+          <Link style={{ textDecoration:"none" }} to='../dashboard'>Meus Sorteios</Link>
         </Button>
         <Button variant="text" style={{ color:"#147A12" }} disabled>
           <AccountCircle sx={{ mr: 1, color:"#147A12", verticalAlign:'center' }}/>
