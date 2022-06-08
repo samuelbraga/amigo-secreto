@@ -1,7 +1,8 @@
 import "express-async-errors";
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
-import EnsureAuthenticated from '@shared/http/middleware/EnsureAuthenticated';
+
+import EnsureAuthenticated from "@shared/http/middleware/EnsureAuthenticated";
 
 import GroupUserController from "../controllers/GroupUserController";
 
@@ -15,7 +16,7 @@ groupUserRouter.post(
     celebrate({
         [Segments.BODY]: {
             user_id: Joi.string().uuid().required(),
-            group_id: Joi.string().uuid().required()
+            group_id: Joi.string().uuid().required(),
         },
     }),
     groupUserController.inviteUser

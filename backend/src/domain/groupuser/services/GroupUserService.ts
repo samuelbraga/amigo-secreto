@@ -12,7 +12,6 @@ import ExceptionBase from "@shared/exceptions/ExceptionBase";
 import getUserIdFromToken from "@shared/session/session";
 
 import IGroupParticipant from "../http/dtos/IGroupParticipant";
-import ISelfGroupUser from "../http/dtos/ISelfGroupUser";
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
 
 @injectable()
@@ -57,15 +56,6 @@ class GroupUserService {
         );
 
         return this.repository.saveSelected(group_id, selectedUsers);
-    }
-
-    public async getByUser(token: string): Promise<ISelfGroupUser[]> {
-        const token_user_id = getUserIdFromToken(token);
-
-        if (!token_user_id) {
-            throw this.createExceptionBase();
-        }
-        return this.repository.getByUser(token_user_id);
     }
 
     public async getByGroup(

@@ -8,3 +8,5 @@ export const GROUP_USER_REPOSITORY = "GroupUserRepository";
 export const HASH_PROVIDER = "HashProvider";
 export const MAIL_PROVIDER = "MailProvider";
 export const MAIL_TEMPLATE_PROVIDER = "MailTemplateProvider";
+
+export const HEADER_EMAIL = "email";

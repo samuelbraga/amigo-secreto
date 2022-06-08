@@ -58,7 +58,7 @@ class GroupUserRepository implements IGroupUserRepository {
     }
 
     public async getByUser(user_id: string): Promise<ISelfGroupUser[]> {
-        return this.prisma.groupUser.findMany({
+        const selfGroups = await this.prisma.groupUser.findMany({
             where: {
                 user_id,
             },
@@ -73,6 +73,8 @@ class GroupUserRepository implements IGroupUserRepository {
                 },
             },
         });
+
+        return selfGroups;
     }
 
     public async getByGroup(group_id: string): Promise<IGroupParticipant[]> {

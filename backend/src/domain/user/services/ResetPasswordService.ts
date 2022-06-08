@@ -13,10 +13,7 @@ import IUserRepository from "@domain/user/repositories/IUserRepository";
 import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
-interface IRequest {
-    token: string;
-    password: string;
-}
+import IResetPasswordRequest from "../http/dtos/IResetPasswordRequest";
 
 @injectable()
 class ResetPasswordService {
@@ -31,7 +28,10 @@ class ResetPasswordService {
         private readonly hashProvider: IHashProvider
     ) {}
 
-    public async execute({ token, password }: IRequest): Promise<void> {
+    public async execute({
+        token,
+        password,
+    }: IResetPasswordRequest): Promise<void> {
         const userToken = await this.userTokenRepository.findByToken(token);
 
         if (!userToken) {
