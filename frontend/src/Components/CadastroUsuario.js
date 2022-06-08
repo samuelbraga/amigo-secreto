@@ -58,7 +58,7 @@ function FormUsuario() {
   })
 
   return (
-    <Grid item xs={12} component={Paper} elevation={6} padding="10px 20px" marginRight="80px" >
+    <Grid item xs={12} component={Paper} elevation={6} padding="0 20px" marginRight="80px" >
     <Snackbar
       open={isVisible}
       message={feedbackMessage}
@@ -75,7 +75,7 @@ function FormUsuario() {
       }}
       borderRadius="10px"
     >
-      <Typography component="h5" variant="h6">
+      <Typography component="h5" variant="h6" padding="20px 0 0 0">
         <b>Cadastre-se agora e começe a participar dos sorteios!</b>
       </Typography>
       <Box padding="0 10%" sx={{ mt: 1 }}>

@@ -35,10 +35,11 @@ function LoginUsuario() {
           password: values.password
         })
         .then((response) => {
+          console.log(response)
           var user = {
-            'name': response.name,
+            'name': response.data.user.name,
             'email': values.email,
-            'tokenBearer': response.token,
+            'tokenBearer': response.data.token,
           }
           sessionStorage['user'] = JSON.stringify(user);
           navigate("/dashboard")
