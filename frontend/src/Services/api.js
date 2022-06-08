@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: `${process.env.API_BASE_URL}`
+    baseURL: 'http://api.mumuz.in/v1'
 })
 
 instance.defaults.headers.contentType = 'application/json'
