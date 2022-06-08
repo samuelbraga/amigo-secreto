@@ -19,7 +19,7 @@ class GroupService {
     ) {}
 
     public async create(
-        { name, gift_value, event_date }: ICreateGroupRequest,
+        groupData: ICreateGroupRequest,
         token: string
     ): Promise<Group> {
         const user_id = getUserIdFromToken(token);
@@ -29,11 +29,7 @@ class GroupService {
         }
 
         return this.repository.save(
-            {
-                name,
-                gift_value,
-                event_date,
-            },
+            groupData,
             user_id
         );
     }
