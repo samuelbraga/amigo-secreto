@@ -19,8 +19,8 @@ resource "aws_ecs_task_definition" "frontend" {
       "environment": [
         {
           "name": "API_BASE_URL",
-          "value": "api.mumuz.in"
-        },
+          "value": "http://api.mumuz.in/v1"
+        }
       ],
       "networkMode": "awsvpc",
       "logConfiguration": {
