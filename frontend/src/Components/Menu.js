@@ -14,6 +14,10 @@ const ResponsiveAppBar = () => {
   const isHome = location.pathname === '/';
   const navigate = useNavigate();
 
+  const logout = () => {
+    sessionStorage.removeItem('user');
+  }
+
   const renderDashboardMenu = () => {
     const userName = user ? user['name'] : null;
 
@@ -33,9 +37,9 @@ const ResponsiveAppBar = () => {
             {userName}
           </Typography>
         </Button>
-        <Button variant="text" style={{ color:"#147A12" }}>
+        <Button variant="text" onClick={logout()} style={{ color:"#147A12" }}>
           <Logout sx={{ mr: 1 }}/>
-          Sair
+          <Link style={{ textDecoration:"none" }} to='../'>Sair</Link>
         </Button>
       </Stack>
     );
