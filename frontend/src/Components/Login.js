@@ -41,7 +41,7 @@ function LoginUsuario() {
             'tokenBearer': response.data.token,
           }
           sessionStorage.setItem('user', JSON.stringify(user))
-          console.log(sessionStorage.getItem('user'))
+          setShowLogin(false)
           navigate("/dashboard")
         })
         .catch((error) => {
