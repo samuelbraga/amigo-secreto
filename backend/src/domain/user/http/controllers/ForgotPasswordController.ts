@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import HttpStatus from "http-status-codes";
 import { container } from "tsyringe";
 
+import { HEADER_EMAIL } from "@constants/application";
 import * as messages from "@constants/messages";
 import SendForgotPasswordEmailService from "@domain/user/services/SendForgotPasswordEmailService";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
@@ -15,7 +16,7 @@ export default class ForgotPasswordController {
             SendForgotPasswordEmailService
         );
 
-        const email = request.header("email");
+        const email = request.header(HEADER_EMAIL);
 
         if (!email) {
             throw new ExceptionBase(

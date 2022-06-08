@@ -13,9 +13,7 @@ import IUserTokenRepository from "@domain/user/repositories/IUserTokenRepository
 import IMailProvider from "@shared/container/providers/mailProvider/models/IMailProvider";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
-interface IRequest {
-    email: string;
-}
+import ISendForgotPasswordEmailRequest from "../http/dtos/ISendForgotPasswordEmailRequest";
 
 @injectable()
 class SendForgotPasswordEmailService {
@@ -30,7 +28,9 @@ class SendForgotPasswordEmailService {
         private readonly userTokenRepository: IUserTokenRepository
     ) {}
 
-    public async execute({ email }: IRequest): Promise<void> {
+    public async execute({
+        email,
+    }: ISendForgotPasswordEmailRequest): Promise<void> {
         const user = await this.userRepository.findUserByEmail(email);
 
         if (!user) {

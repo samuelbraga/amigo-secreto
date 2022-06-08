@@ -4,6 +4,8 @@ import { container } from "tsyringe";
 
 import ResetPasswordService from "@domain/user/services/ResetPasswordService";
 
+import IResetPasswordRequest from "../dtos/IResetPasswordRequest";
+
 export default class ResetPasswordController {
     public async resetPassword(
         request: Request,
@@ -11,7 +13,7 @@ export default class ResetPasswordController {
     ): Promise<Response> {
         const resetPasswordService = container.resolve(ResetPasswordService);
 
-        const { token, password } = request.body;
+        const { token, password }: IResetPasswordRequest = request.body;
 
         await resetPasswordService.execute({ token, password });
 
