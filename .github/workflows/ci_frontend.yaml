@@ -22,4 +22,8 @@ jobs:
 
       - run: cd frontend && npm install
 
+<<<<<<< HEAD
       # - run: cd frontend && npm run build
+=======
+      - run: cd frontend && npm run build
+>>>>>>> 4f01acf1f7d0b8952f323d450036865ef4bd2477
