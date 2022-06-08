@@ -63,7 +63,7 @@ function FormUsuario() {
       open={isVisible}
       message={feedbackMessage}
       anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
-      key={'top' + 'center'}
+      key={'top center'}
     />
     <Box
       sx={{

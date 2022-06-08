@@ -1,8 +1,6 @@
 import * as React from 'react';
 
-import { Box, Typography, Paper } from '@mui/material';
-
-import SorteioCard from '../Components/Card';
+import { Typography, Paper } from '@mui/material';
 
 const UserBets = () => {
   return (

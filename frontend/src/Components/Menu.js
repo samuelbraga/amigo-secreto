@@ -22,7 +22,7 @@ const ResponsiveAppBar = () => {
                 type="submit"
                 onClick={() => setShowLogin(true)}
                 style={{ backgroundColor:"#147A12" }}
-                sx={{ mt: 3 }}
+                sx={{ mt: 3, marginBottom: '20%'}}
               >
                 Entrar
               </Button>

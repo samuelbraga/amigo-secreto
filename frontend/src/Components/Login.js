@@ -34,7 +34,13 @@ function LoginUsuario() {
           email: values.email,
           password: values.password
         })
-        .then(() => {
+        .then((response) => {
+          var user = {
+            'name': response.name,
+            'email': values.email,
+            'tokenBearer': response.token,
+          }
+          sessionStorage['user'] = JSON.stringify(user);
           navigate("/dashboard")
         })
         .catch((error) => {
