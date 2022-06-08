@@ -22,7 +22,6 @@ function LoginUsuario() {
       .string('Digite sua senha')
       .required('A senha é obrigatória'),
   });
-
   const formik = useFormik({
       initialValues: {
         email: '',
@@ -41,6 +40,7 @@ function LoginUsuario() {
             'tokenBearer': response.data.token,
           }
           sessionStorage.setItem('user', JSON.stringify(user))
+          console.log(sessionStorage.getItem('user'))
           navigate("/dashboard")
         })
         .catch((error) => {
