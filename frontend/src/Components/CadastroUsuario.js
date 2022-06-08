@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -6,15 +6,14 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import newUser from "../Services/cadastro";
 import Grid from '@mui/material/Grid';
-import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import { initialFormValues } from "../Helpers/Constants";
+import { DatePicker } from '@mui/x-date-pickers';
+import { initialCadastroUsuario } from "../Helpers/Constants";
+import { AppContext } from "../Context/AppContext";
 
 //TODO: COLOCAR MASCARA NO NASCIMENTO
 function FormUsuario() {
-  const [feedbackMessage, setFeedbackMessage] = useState('')
-  const [isVisible, setIsVisible] = useState(false)
   const validationLogin = yup.object({
     email: yup
       .string('Digite um email')
@@ -23,16 +22,16 @@ function FormUsuario() {
     password: yup
       .string('Digite sua senha')
       .required('A senha é obrigatória'),
-    dataNascimento: yup
+    birthdayData: yup
       .string('Digite sua data de nascimento')
       .required('A data de nascimento é obrigatória'),
     name: yup
       .string('Digite seu nome')
       .required('O nome é obrigatório'),
   });
-
+  const { setIsVisible, setFeedbackMessage } = React.useContext(AppContext)
   const formik = useFormik({
-      initialValues: initialFormValues,
+      initialValues: initialCadastroUsuario,
       validationSchema: validationLogin,
       onSubmit: (values) => {
         newUser({
@@ -41,9 +40,10 @@ function FormUsuario() {
           password: values.password
         })
           .then(() => {
-            formik.setValues(initialFormValues)
             setFeedbackMessage('Cadastro efetuado com sucesso!')
             setIsVisible(true)
+            formik.setValues(initialCadastroUsuario)
+            formik.setTouched({}, false)
           })
           .catch((error) => {
             setFeedbackMessage('Não foi possível efetuar o cadastro')
@@ -59,12 +59,6 @@ function FormUsuario() {
 
   return (
     <Grid item xs={12} component={Paper} elevation={6} padding="0 20px" marginRight="80px" >
-    <Snackbar
-      open={isVisible}
-      message={feedbackMessage}
-      anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
-      key={'top center'}
-    />
     <Box
       sx={{
         my: 8,
@@ -118,28 +112,26 @@ function FormUsuario() {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
-          <TextField
-            margin="normal"
-            fullWidth
-            value={formik.values.dataNascimento}
-            onChange={formik.handleChange}
-            name="dataNascimento"
+          <DatePicker
+            id="birthdayData"
+            name="birthdayData"
+            error={formik.touched.birthdayData && Boolean(formik.errors.birthdayData)}
+            helperText={formik.touched.birthdayData && formik.errors.birthdayData}
             label="Data Nascimento"
-            type="dataNascimento"
-            id="dataNascimento"
-            error={formik.touched.dataNascimento && Boolean(formik.errors.dataNascimento)}
-            helperText={formik.touched.dataNascimento && formik.errors.dataNascimento}
+            value={formik.values.birthdayData}
+            onChange={(event) => formik.setFieldValue('birthdayData', event)}
+            renderInput={(params) => <TextField {...params} margin="normal" fullWidth/>}
           />
           <TextField
             margin="normal"
             fullWidth
-            value={formik.values.listaPresentes}
+            value={formik.values.giftList}
             onChange={formik.handleChange}
-            name="listaPresentes"
+            name="giftList"
             label="Lista de Presente"
             helperText="Conta pra gente o que você adoraria ganhar!"
-            type="listaPresentes"
-            id="listaPresentes"
+            type="giftList"
+            id="giftList"
           />
           <Button
             variant="contained"

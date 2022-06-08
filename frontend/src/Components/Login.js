@@ -35,7 +35,6 @@ function LoginUsuario() {
           password: values.password
         })
         .then((response) => {
-          console.log(response)
           var user = {
             'name': response.data.user.name,
             'email': values.email,
