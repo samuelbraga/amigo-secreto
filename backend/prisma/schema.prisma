@@ -32,14 +32,21 @@ model UserToken {
 }
 
 model Group {
-  id         String    @id @default(uuid())
-  name       String
-  event_date DateTime?
-  gift_value Int?
-  user       User      @relation(fields: [created_by], references: [id])
-  created_by String
-  created_at DateTime  @default(now())
-  updated_at DateTime?
+  id            String    @id @default(uuid())
+  name          String
+  event_date    DateTime?
+  gift_value    Int?
+  cep           Int?
+  street        String?
+  neighborhood  String?
+  city          String?
+  state         String?
+  complement    String?
+  description   String?
+  user          User      @relation(fields: [created_by], references: [id])
+  created_by    String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime?
 
   GroupUser GroupUser[]
   @@map("group")

@@ -18,13 +18,30 @@ class GroupRepository implements IGroupRepository {
         data: ICreateGroupRequest,
         created_by: string
     ): Promise<Group> {
-        const { name, event_date, gift_value } = data;
+        const { 
+            name,
+            event_date,
+            gift_value,
+            cep,
+            street,
+            neighborhood,
+            city,
+            state,
+            complement,
+            description } = data;
 
         const group = await this.prisma.group.create({
             data: {
                 name,
                 event_date,
                 gift_value,
+                cep,
+                street,
+                neighborhood,
+                city,
+                state,
+                complement,
+                description,
                 created_by,
             },
         });
@@ -43,7 +60,17 @@ class GroupRepository implements IGroupRepository {
         data: IUpdateGroupRequest,
         user_id: string
     ): Promise<Group | null> {
-        const { id, name, event_date, gift_value } = data;
+        const { id,
+            name,
+            event_date,
+            gift_value,
+            cep,
+            street,
+            neighborhood,
+            city,
+            state,
+            complement,
+            description } = data;
 
         await this.prisma.group.updateMany({
             where: {
@@ -56,6 +83,13 @@ class GroupRepository implements IGroupRepository {
                 name,
                 event_date,
                 gift_value,
+                cep,
+                street,
+                neighborhood,
+                city,
+                state,
+                complement,
+                description,
                 updated_at: new Date(Date.now()).toISOString(),
             },
         });
