@@ -7,12 +7,11 @@ import SorteioCard from '../Components/Card';
 import UserGroup from "../Services/getGroup";
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-const token = user['tokenBearer'];
-
 const UserDraw = () => {
   const [groups, setGroups] = useState('')
 
   useEffect(() => {
+    const token = user['tokenBearer'];
     UserGroup({ token: token })
       .then((res) => {
         console.log(res)

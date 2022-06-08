@@ -40,7 +40,7 @@ function LoginUsuario() {
             'email': values.email,
             'tokenBearer': response.data.token,
           }
-          sessionStorage['user'] = JSON.stringify(user);
+          sessionStorage.setItem('user', JSON.stringify(user))
           navigate("/dashboard")
         })
         .catch((error) => {
