@@ -127,6 +127,42 @@
                     }
                 }
             }
+        },
+        "/group/invite": {
+            "post": {
+                "description": "Invite another user for my event",
+                "summary": "Invite another user",
+                "operationId": "inviteUser",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InviteUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Reset Password"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionBase"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -237,7 +273,7 @@
                     "password": {
                         "type": "string"
                     },
-                    "passwordConfirmation": {
+                    "password_confirmation": {
                         "type": "string",
                         "example": "#%P&pM4z"
                     }
@@ -246,6 +282,23 @@
                     "token",
                     "password",
                     "passwordConfirmation"
+                ]
+            },
+            "InviteUserRequest": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "group_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "required": [
+                    "user_id",
+                    "group_id"
                 ]
             },
             "ExceptionBase": {
@@ -271,6 +324,13 @@
                         "type": "string",
                         "example": "Instance of error"
                     }
+                }
+            },
+            "securitySchemes": {
+                "bearerAuth": {
+                  "type": "http",
+                  "scheme": "bearer",
+                  "bearerFormat": "JWT"
                 }
             }
         }

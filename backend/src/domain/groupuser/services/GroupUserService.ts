@@ -25,29 +25,6 @@ class GroupUserService {
         private readonly groupRepository: IGroupRepository
     ) {}
 
-    public async invite(
-        group_id: string,
-        user_id: string,
-        token: string
-    ): Promise<GroupUser> {
-        const token_user_id = getUserIdFromToken(token);
-
-        if (!token_user_id) {
-            throw this.createExceptionBase();
-        }
-
-        const group = this.groupRepository.getByUserAdmin(
-            token_user_id,
-            group_id
-        );
-
-        if (!group) {
-            throw this.createUnauthorizedExceptionBase();
-        }
-
-        return this.repository.invite(group_id, user_id);
-    }
-
     public async shuffle(
         group_id: string,
         token: string
