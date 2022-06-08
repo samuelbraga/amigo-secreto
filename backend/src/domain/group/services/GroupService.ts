@@ -28,10 +28,7 @@ class GroupService {
             throw this.createExceptionBase();
         }
 
-        return this.repository.save(
-            groupData,
-            user_id
-        );
+        return this.repository.save(groupData, user_id);
     }
 
     public async update(
