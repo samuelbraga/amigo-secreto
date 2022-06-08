@@ -17,7 +17,7 @@ const app = express();
 app.disable("x-powered-by");
 
 const corsOptions = {
-    origin: ["localhost:3000", "www.mumuz.in"],
+    origin: ["http://localhost:3000", "http://www.mumuz.in"],
 };
 
 app.use(cors(corsOptions));
