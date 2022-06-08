@@ -1,11 +1,16 @@
-import { GROUP_REPOSITORY, GROUP_USER_REPOSITORY } from "@constants/application";
+import HttpStatus from "http-status-codes";
+import { inject, injectable } from "tsyringe";
+
+import {
+    GROUP_REPOSITORY,
+    GROUP_USER_REPOSITORY,
+} from "@constants/application";
+import * as messages from "@constants/messages";
 import IGroupRepository from "@domain/group/repositories/IGroupRepository";
 import { GroupUser } from "@prisma/client";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
-import { inject, injectable } from "tsyringe";
+
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
-import HttpStatus from "http-status-codes";
-import * as messages from "@constants/messages";
 
 @injectable()
 class InviteUserToGroupSerive {
@@ -16,7 +21,7 @@ class InviteUserToGroupSerive {
         @inject(GROUP_REPOSITORY)
         private readonly groupRepository: IGroupRepository
     ) {}
-    
+
     public async execute(
         group_id: string,
         inveted_user_id: string,
@@ -31,7 +36,12 @@ class InviteUserToGroupSerive {
             throw this.createUnauthorizedExceptionBase();
         }
 
-        return await this.repository.invite(group_id, inveted_user_id);
+        const groupUser = await this.repository.invite(
+            group_id,
+            inveted_user_id
+        );
+
+        return groupUser;
     }
 
     private createUnauthorizedExceptionBase(): ExceptionBase {
