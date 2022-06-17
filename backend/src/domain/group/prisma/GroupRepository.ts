@@ -18,34 +18,10 @@ class GroupRepository implements IGroupRepository {
         data: ICreateGroupRequest,
         created_by: string
     ): Promise<Group> {
-        const {
-            name,
-            event_date,
-            gift_value,
-            cep,
-            street,
-            neighborhood,
-            city,
-            state,
-            complement,
-            description,
-        } = data;
-
         const group = await this.prisma.group.create({
-            data: {
-                name,
-                event_date,
-                gift_value,
-                cep,
-                street,
-                neighborhood,
-                city,
-                state,
-                complement,
-                description,
-                created_by,
-            },
+            data: { ...data, created_by },
         });
+
         await this.prisma.groupUser.create({
             data: {
                 status: InviteStatus.ACCEPTED,
@@ -61,45 +37,22 @@ class GroupRepository implements IGroupRepository {
         data: IUpdateGroupRequest,
         user_id: string
     ): Promise<Group | null> {
-        const {
-            id,
-            name,
-            event_date,
-            gift_value,
-            cep,
-            street,
-            neighborhood,
-            city,
-            state,
-            complement,
-            description,
-        } = data;
-
         await this.prisma.group.updateMany({
             where: {
-                id,
+                id: data.id,
                 user: {
                     id: user_id,
                 },
             },
             data: {
-                name,
-                event_date,
-                gift_value,
-                cep,
-                street,
-                neighborhood,
-                city,
-                state,
-                complement,
-                description,
+                ...data,
                 updated_at: new Date(Date.now()).toISOString(),
             },
         });
 
         return this.prisma.group.findUnique({
             where: {
-                id,
+                id: data.id,
             },
         });
     }

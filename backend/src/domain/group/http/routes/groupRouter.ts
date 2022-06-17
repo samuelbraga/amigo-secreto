@@ -2,9 +2,12 @@ import "express-async-errors";
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 
+import EnsureAuthenticated from "@shared/http/middleware/EnsureAuthenticated";
+
 import GroupController from "../controllers/GroupController";
 
 const groupRouter = Router();
+groupRouter.use(EnsureAuthenticated);
 
 const groupController = new GroupController();
 
@@ -22,24 +25,15 @@ groupRouter.post(
             state: Joi.string(),
             complement: Joi.string(),
             description: Joi.string(),
-            token: Joi.string().required(),
         },
     }),
     groupController.createGroup
 );
 
-groupRouter.post(
-    "/user/",
-    celebrate({
-        [Segments.BODY]: {
-            token: Joi.string().required(),
-        },
-    }),
-    groupController.getUserGroups
-);
+groupRouter.get("/", groupController.getUserGroups);
 
-groupRouter.post(
-    "/:id/",
+groupRouter.put(
+    "/:id",
     celebrate({
         [Segments.BODY]: {
             name: Joi.string().required(),
@@ -52,7 +46,6 @@ groupRouter.post(
             state: Joi.string(),
             complement: Joi.string(),
             description: Joi.string(),
-            token: Joi.string().required(),
         },
         [Segments.PARAMS]: {
             id: Joi.string().uuid().required(),
