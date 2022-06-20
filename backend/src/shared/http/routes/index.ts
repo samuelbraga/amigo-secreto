@@ -12,8 +12,8 @@ routes.use("/user", userRouter);
 routes.use("/sessions", sessionsRouter);
 routes.use("/password", passwordRouter);
 
-routes.use("/group", groupRouter);
+routes.use("/group", groupRouter, groupUserRouter);
 
-routes.use("/group-user", groupUserRouter);
+// routes.use("/group-user", groupUserRouter);
 
 export default routes;

@@ -20,7 +20,7 @@ COPY prisma prisma
 
 RUN npm install --production
 
-RUN npm run generate
+RUN npm run prisma:generate
 
 COPY --from=build /app/dist .
 

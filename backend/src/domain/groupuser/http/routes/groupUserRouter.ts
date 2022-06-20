@@ -5,6 +5,7 @@ import { Router } from "express";
 import EnsureAuthenticated from "@shared/http/middleware/EnsureAuthenticated";
 
 import GroupUserController from "../controllers/GroupUserController";
+import EnsureGroupAdmin from "@shared/http/middleware/EnsureGroupAdmin";
 
 const groupUserRouter = Router();
 groupUserRouter.use(EnsureAuthenticated);
@@ -12,13 +13,13 @@ groupUserRouter.use(EnsureAuthenticated);
 const groupUserController = new GroupUserController();
 
 groupUserRouter.post(
-    "/invite",
+    "/:id/invite",
     celebrate({
-        [Segments.BODY]: {
-            user_id: Joi.string().uuid().required(),
-            group_id: Joi.string().uuid().required(),
+        [Segments.PARAMS]: {
+            id: Joi.string().uuid().required(),
         },
     }),
+    EnsureGroupAdmin,
     groupUserController.inviteUser
 );
 

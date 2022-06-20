@@ -10,3 +10,4 @@ export const MAIL_PROVIDER = "MailProvider";
 export const MAIL_TEMPLATE_PROVIDER = "MailTemplateProvider";
 
 export const HEADER_EMAIL = "email";
+export const HEADER_USER_ID = "user_id";

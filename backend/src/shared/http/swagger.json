@@ -1,8 +1,10 @@
 {
     "openapi": "3.0.3",
-    "title": "Amigo Oculto API",
-    "description": "Api para criação, gerenciamento e controle de amigo oculto",
-    "version": "1.0.1",
+    "info": {
+        "title": "Amigo Oculto API",
+        "description": "Api para criação, gerenciamento e controle de amigo oculto",
+        "version": "1.0.1"
+    },
     "servers": [
         {
             "url": "http://localhost:3333/v1",
@@ -80,7 +82,7 @@
                 "operationId": "createResetPasswordToken",
                 "parameters": [
                     {
-                        "$ref": "#/components/schemas/EmailHeader"
+                        "$ref": "#/components/parameters/EmailHeader"
                     }
                 ],
                 "responses": {
@@ -225,7 +227,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/schemas/GroupIdParam"
+                        "$ref": "#/components/parameters/GroupIdParam"
                     }
                 ],
                 "requestBody": {
@@ -261,9 +263,9 @@
                 }
             }
         },
-        "/group/invite": {
+        "/group/{id}/invite": {
             "post": {
-                "description": "Invite another user for my event",
+                "description": "Invite another user for my secret santa",
                 "summary": "Invite another user",
                 "operationId": "inviteUser",
                 "security": [
@@ -271,21 +273,30 @@
                         "bearerAuth": []
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/InviteUserRequest"
-                            }
-                        }
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/GroupIdParam"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EmailHeader"
                     }
-                },
+                ],
                 "responses": {
-                    "204": {
+                    "201": {
                         "description": "Reset Password"
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionBase"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -299,7 +310,7 @@
         }
     },
     "components": {
-        "schemas": {
+        "parameters": {
             "EmailHeader": {
                 "name": "email",
                 "in": "header",
@@ -321,7 +332,9 @@
                     "type": "string",
                     "format": "uuid"
                 }
-            },
+            }
+        },
+        "schemas": {
             "CreateUserRequest": {
                 "type": "object",
                 "properties": {
