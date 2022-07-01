@@ -1,31 +1,39 @@
 import { inject, injectable } from "tsyringe";
 
 import {
-    GROUP_REPOSITORY,
     GROUP_USER_REPOSITORY,
+    INVITED_USER_REPOSITORY,
+    USER_REPOSITORY,
 } from "@constants/application";
-import IGroupRepository from "@domain/group/repositories/IGroupRepository";
+import IUserRepository from "@domain/user/repositories/IUserRepository";
 
-import IGroupUserResponse from "../http/dtos/IGroupUserResponse";
 import IGroupUserRepository from "../repositories/IGroupUserRepository";
+import IInvitedUserRepository from "../repositories/IInvitedUserRepository";
 
 @injectable()
 class InviteUserToGroupSerive {
     constructor(
-        @inject(GROUP_USER_REPOSITORY)
-        private readonly repository: IGroupUserRepository,
+        @inject(USER_REPOSITORY)
+        private readonly userRepository: IUserRepository,
 
-        @inject(GROUP_REPOSITORY)
-        private readonly groupRepository: IGroupRepository
+        @inject(GROUP_USER_REPOSITORY)
+        private readonly groupUserRepository: IGroupUserRepository,
+
+        @inject(INVITED_USER_REPOSITORY)
+        private readonly invitedUserRepository: IInvitedUserRepository
     ) {}
 
-    public async execute(
-        groupId: string,
-        invetedUserId: string
-    ): Promise<IGroupUserResponse> {
-        const groupUser = await this.repository.invite(groupId, invetedUserId);
+    public async execute(groupId: string, email: string): Promise<void> {
+        const user = await this.userRepository.findUserByEmail(email);
 
-        return groupUser;
+        // if (!user) {
+        //     // await this.invitedUserRepository.create(email, groupId);
+        //     // send Email
+        //     return;
+        // }
+
+        // await this.groupUserRepository.invite(groupId, user.id);
+        // send Email
     }
 }
 

@@ -14,6 +14,4 @@ routes.use("/password", passwordRouter);
 
 routes.use("/group", groupRouter, groupUserRouter);
 
-// routes.use("/group-user", groupUserRouter);
-
 export default routes;

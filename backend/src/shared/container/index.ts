@@ -7,11 +7,14 @@ import {
     USER_TOKEN_REPOSITORY,
     GROUP_REPOSITORY,
     GROUP_USER_REPOSITORY,
+    INVITED_USER_REPOSITORY,
 } from "@constants/application";
 import GroupRepository from "@domain/group/prisma/GroupRepository";
 import IGroupRepository from "@domain/group/repositories/IGroupRepository";
 import GroupUserRepository from "@domain/groupuser/prisma/GroupUserRepository";
+import InvitedUserRepository from "@domain/groupuser/prisma/InvitedUserRepository";
 import IGroupUserRepository from "@domain/groupuser/repositories/IGroupUserRepository";
+import IInvitedUserRepository from "@domain/groupuser/repositories/IInvitedUserRepository";
 import UserRepository from "@domain/user/prisma/UserRepository";
 import UserTokenRepository from "@domain/user/prisma/UserTokenRepository";
 import IUserRepository from "@domain/user/repositories/IUserRepository";
@@ -32,4 +35,9 @@ container.registerSingleton<IGroupRepository>(
 container.registerSingleton<IGroupUserRepository>(
     GROUP_USER_REPOSITORY,
     GroupUserRepository
+);
+
+container.registerSingleton<IInvitedUserRepository>(
+    INVITED_USER_REPOSITORY,
+    InvitedUserRepository
 );

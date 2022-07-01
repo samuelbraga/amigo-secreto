@@ -3,9 +3,9 @@ import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 
 import EnsureAuthenticated from "@shared/http/middleware/EnsureAuthenticated";
+import EnsureGroupAdmin from "@shared/http/middleware/EnsureGroupAdmin";
 
 import GroupUserController from "../controllers/GroupUserController";
-import EnsureGroupAdmin from "@shared/http/middleware/EnsureGroupAdmin";
 
 const groupUserRouter = Router();
 groupUserRouter.use(EnsureAuthenticated);

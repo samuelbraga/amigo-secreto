@@ -8,7 +8,7 @@ import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
 export default async (
     request: Request,
-    _response: Response,
+    response: Response,
     next: NextFunction
 ): Promise<void> => {
     const isGroupUserAdmin = container.resolve(IsGroupUserAdmin);
@@ -27,6 +27,6 @@ export default async (
             messages.USER_UNAUTHORIZED_INSTANCE
         );
     } else {
-        next()
+        next();
     }
 };

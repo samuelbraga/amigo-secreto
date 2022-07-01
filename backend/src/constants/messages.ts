@@ -35,3 +35,9 @@ export const USER_UNAUTHORIZED_TITLE = "Usuário não autorizado";
 export const USER_UNAUTHORIZED_DETAIL =
     "O usuário não tem permissão para realizar a operação com os dados fornecidos";
 export const USER_UNAUTHORIZED_INSTANCE = "user/operation/credentials";
+
+export const GROUP_INSTANCE = "group";
+
+export const GROUP_NOT_EXISTS_TYPE = "group.not.exists";
+export const GROUP_NOT_EXISTS_TITLE = "Grupo não existente";
+export const GROUP_NOT_EXISTS_DETAIL = "O grupo informado não existe";

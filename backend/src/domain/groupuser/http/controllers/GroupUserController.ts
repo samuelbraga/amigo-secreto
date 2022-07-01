@@ -20,28 +20,21 @@ export default class GroupUserController {
         );
 
         const groupId = request.params.id;
-        const invetedUserId = request.header(HEADER_EMAIL);
+        const email = request.header(HEADER_EMAIL);
 
-        console.log(groupId)
-        console.log(invetedUserId)
-        
-        // if (!invetedUserId) {
-        //     throw new ExceptionBase(
-        //         messages.USER_DOES_NOT_EXISTS_TYPE,
-        //         messages.USER_DOES_NOT_EXISTS_TITLE,
-        //         HttpStatus.BAD_REQUEST,
-        //         messages.USER_DOES_NOT_EXISTS_DETAIL,
-        //         messages.USER_INSTANCE
-        //     );
-        // }
+        if (!email) {
+            throw new ExceptionBase(
+                messages.USER_DOES_NOT_EXISTS_TYPE,
+                messages.USER_DOES_NOT_EXISTS_TITLE,
+                HttpStatus.BAD_REQUEST,
+                messages.USER_DOES_NOT_EXISTS_DETAIL,
+                messages.USER_INSTANCE
+            );
+        }
 
-        // const group = await inviteUserToGroupSerive.execute(
-        //     groupId,
-        //     invetedUserId
-        // );
+        await inviteUserToGroupSerive.execute(groupId, email);
 
-        // return response.status(HttpStatus.CREATED).json(group);
-        return response.status(HttpStatus.CREATED);
+        return response.status(HttpStatus.NO_CONTENT).json();
     }
 
     public async shuffle(

@@ -14,6 +14,14 @@ class GroupRepository implements IGroupRepository {
         private readonly prisma: PrismaClient
     ) {}
 
+    public async getById(group_id: string): Promise<Group | null> {
+        return this.prisma.group.findFirst({
+            where: {
+                id: group_id,
+            },
+        });
+    }
+
     public async save(
         data: ICreateGroupRequest,
         created_by: string

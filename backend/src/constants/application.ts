@@ -4,6 +4,7 @@ export const USER_REPOSITORY = "UserRepository";
 export const USER_TOKEN_REPOSITORY = "UserTokenRepository";
 export const GROUP_REPOSITORY = "GroupRepository";
 export const GROUP_USER_REPOSITORY = "GroupUserRepository";
+export const INVITED_USER_REPOSITORY = "InvitedUserRepository";
 
 export const HASH_PROVIDER = "HashProvider";
 export const MAIL_PROVIDER = "MailProvider";

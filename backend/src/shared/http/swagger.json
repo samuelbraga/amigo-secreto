@@ -267,6 +267,7 @@
             "post": {
                 "description": "Invite another user for my secret santa",
                 "summary": "Invite another user",
+                "tags": ["group"],
                 "operationId": "inviteUser",
                 "security": [
                     {
@@ -282,8 +283,8 @@
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Reset Password"
+                    "204": {
+                        "description": "Invite sended"
                     },
                     "401": {
                         "description": "Unauthorized",
