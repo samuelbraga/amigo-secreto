@@ -1,6 +1,7 @@
+import { v4 } from "uuid";
+
 import FakeGroupUserRepository from "@domain/groupuser/repositories/fakes/FakeGroupUserRepository";
 import GetGroupsByUserService from "@domain/groupuser/services/GetGroupsByUserService";
-import { v4 } from "uuid";
 
 let fakeGroupUserRepository: FakeGroupUserRepository;
 let getGroupService: GetGroupsByUserService;
@@ -8,9 +9,7 @@ let getGroupService: GetGroupsByUserService;
 describe("GetGroupsByUser", () => {
     beforeEach(() => {
         fakeGroupUserRepository = new FakeGroupUserRepository();
-        getGroupService = new GetGroupsByUserService(
-            fakeGroupUserRepository
-        );
+        getGroupService = new GetGroupsByUserService(fakeGroupUserRepository);
     });
 
     it("empty groups", async () => {

@@ -5,17 +5,17 @@ import { container } from "tsyringe";
 import { HEADER_EMAIL } from "@constants/application";
 import * as messages from "@constants/messages";
 import GetGroupsByUserService from "@domain/groupuser/services/GetGroupsByUserService";
+import InviteUserToGroupService from "@domain/groupuser/services/InviteUserToGroupService";
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
 import GroupUserService from "../../services/GroupUserService";
-import InviteUserToGroupService from "../../services/InviteUserToGroupService";
 
 export default class GroupUserController {
     public async inviteUser(
         request: Request,
         response: Response
     ): Promise<Response> {
-        const InviteUserToGroupService = container.resolve(
+        const inviteUserToGroupService = container.resolve(
             InviteUserToGroupService
         );
 
@@ -32,7 +32,7 @@ export default class GroupUserController {
             );
         }
 
-        await InviteUserToGroupService.execute(groupId, email);
+        await inviteUserToGroupService.execute(groupId, email);
 
         return response.status(HttpStatus.NO_CONTENT).json();
     }

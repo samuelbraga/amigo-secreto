@@ -1,33 +1,45 @@
 import { v4 } from "uuid";
 
-import IGroupRepository from "@domain/group/repositories/IGroupRepository";
-import { Group, GroupUser, InviteStatus } from "@prisma/client";
 import ICreateGroupRequest from "@domain/group/http/dtos/ICreateGroupRequest";
 import IUpdateGroupRequest from "@domain/group/http/dtos/IUpdateGroupRequest";
+import IGroupRepository from "@domain/group/repositories/IGroupRepository";
+import { Group, GroupUser, InviteStatus } from "@prisma/client";
 
 class FakeGroupRepository implements IGroupRepository {
     private groups: Group[] = [];
     private group_users: GroupUser[] = [];
 
     public async getByUser(user_id: string): Promise<Group[]> {
-        const group_users = this.group_users.filter((group) => group.user_id === user_id);
-        const groups = this.groups.filter((group) => group_users.find((gu) => gu.group_id === group.id));
+        const group_users = this.group_users.filter(
+            (group) => group.user_id === user_id
+        );
+        const groups = this.groups.filter((group) =>
+            group_users.find((gu) => gu.group_id === group.id)
+        );
         return groups || [];
     }
 
-    public async getByUserAdmin(user_id: string, group_id: string): Promise<Group | null> {
-        const group = this.groups.find((group) => group.created_by == user_id && group.id == group_id);
+    public async getByUserAdmin(
+        user_id: string,
+        group_id: string
+    ): Promise<Group | null> {
+        const group = this.groups.find(
+            (group) => group.created_by === user_id && group.id === group_id
+        );
         if (!group) return null;
         return {
-            ...group
-        }
+            ...group,
+        };
     }
 
     public async getById(id: string): Promise<Group | null> {
         return this.groups.find((group) => group.id === id) || null;
     }
 
-    public async save(data: ICreateGroupRequest, created_by: string): Promise<Group> {
+    public async save(
+        data: ICreateGroupRequest,
+        created_by: string
+    ): Promise<Group> {
         const g: Group = {
             ...data,
             created_by,
@@ -42,24 +54,23 @@ class FakeGroupRepository implements IGroupRepository {
             complement: data.complement ? data.complement : null,
             description: data.description ? data.description : null,
             created_at: new Date(Date.now()),
-            updated_at: null
+            updated_at: null,
         };
         const gu: GroupUser = {
             status: InviteStatus.ACCEPTED,
             group_id: g.id,
             user_id: created_by,
             selected_user_id: null,
-            created_at: new Date(Date.now())
+            created_at: new Date(Date.now()),
+            updated_at: null,
         };
         this.groups.push(g);
         this.group_users.push(gu);
         return g;
     }
 
-    public async update(data: IUpdateGroupRequest, user_id: string): Promise<Group> {
-        const findIndex = this.groups.findIndex(
-            (g) => g.id === data.id
-        );
+    public async update(data: IUpdateGroupRequest): Promise<Group> {
+        const findIndex = this.groups.findIndex((g) => g.id === data.id);
 
         this.groups[findIndex] = {
             ...this.groups[findIndex],
@@ -73,7 +84,7 @@ class FakeGroupRepository implements IGroupRepository {
             city: data.city ? data.city : null,
             complement: data.complement ? data.complement : null,
             description: data.description ? data.description : null,
-            updated_at: new Date(Date.now())
+            updated_at: new Date(Date.now()),
         };
 
         return this.groups[findIndex];

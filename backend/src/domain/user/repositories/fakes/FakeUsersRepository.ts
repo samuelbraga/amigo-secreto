@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 
+import ICreateUserRequest from "@domain/user/http/dtos/ICreateUserRequest";
 import IUsersRepository from "@domain/user/repositories/IUserRepository";
 import { User } from "@prisma/client";
 
@@ -18,7 +19,11 @@ class FakeUsersRepository implements IUsersRepository {
         return findUser;
     }
 
-    public async save({ name, email, password }: User): Promise<User> {
+    public async save({
+        name,
+        email,
+        password,
+    }: ICreateUserRequest): Promise<User> {
         const user: User = {
             id: v4(),
             name,
