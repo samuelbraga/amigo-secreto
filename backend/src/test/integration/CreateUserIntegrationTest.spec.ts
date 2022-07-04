@@ -34,7 +34,7 @@ it("should be create an user", async () => {
 });
 
 
-it("should not be creta an user", async () => {
+it("should not be create an user", async () => {
     const email = "foo.bar@example.com";
     const name = "Foo Bar";
     const password = "#%P&pM4z";
@@ -58,4 +58,10 @@ it("should not be creta an user", async () => {
 
     expect(response.status).toBe(400);
     expect(response.body.title).toBe(USER_EMAIL_EXISTS_TITLE);
+});
+
+it("should not be create an user invalid request", async () => {
+    const response = await request(app).post("/v1/user");
+
+    expect(response.status).toBe(400);
 });
