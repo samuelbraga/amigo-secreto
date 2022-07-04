@@ -89,6 +89,7 @@ function LoginUsuario() {
               label="Email"
               name="email"
               autoComplete="email"
+              inputProps={{"data-testid": 'email'}}
               autoFocus
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
@@ -103,6 +104,7 @@ function LoginUsuario() {
               type="password"
               id="password"
               autoComplete="current-password"
+              inputProps={{"data-testid": 'password'}}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
@@ -111,6 +113,7 @@ function LoginUsuario() {
               type="submit"
               onClick={() => console.log('entrar')}
               style={{ backgroundColor:"#147A12" }}
+              data-testid="login"
               sx={{ mt: 3, mb: 2 }}
             >
               Entrar

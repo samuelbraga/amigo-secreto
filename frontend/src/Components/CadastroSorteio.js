@@ -90,6 +90,7 @@ function FormSorteio() {
               name="name"
               autoComplete="name"
               autoFocus
+              inputProps={{"data-testid": 'name'}}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
             />
@@ -102,6 +103,7 @@ function FormSorteio() {
               helperText={formik.touched.event_date && formik.errors.event_date}
               label="Data do Amigo Secreto *"
               value={formik.values.event_date}
+              inputProps={{"data-testid": 'date'}}
               onChange={(event) => formik.setFieldValue('event_date', event)}
               renderInput={(params) => <TextField {...params} variant="standard" margin="normal" fullWidth/>}
             />
@@ -118,6 +120,7 @@ function FormSorteio() {
               name="gift_value"
               autoComplete="gift_value"
               autoFocus
+              inputProps={{"data-testid": 'amount'}}
               error={formik.touched.gift_value && Boolean(formik.errors.gift_value)}
               helperText={formik.touched.gift_value && formik.errors.gift_value}
             />
@@ -134,6 +137,7 @@ function FormSorteio() {
               name="cep"
               autoComplete="cep"
               autoFocus
+              inputProps={{"data-testid": 'cep'}}
               error={formik.touched.cep && Boolean(formik.errors.cep)}
               helperText={formik.touched.cep && formik.errors.cep}
             />
@@ -150,6 +154,7 @@ function FormSorteio() {
               name="street"
               autoComplete="street"
               autoFocus
+              inputProps={{"data-testid": 'street'}}
               error={formik.touched.street && Boolean(formik.errors.street)}
               helperText={formik.touched.street && formik.errors.street}
             />
@@ -166,6 +171,7 @@ function FormSorteio() {
               name="neighborhood"
               autoComplete="neighborhood"
               autoFocus
+              inputProps={{"data-testid": 'number'}}
               error={formik.touched.neighborhood && Boolean(formik.errors.neighborhood)}
               helperText={formik.touched.neighborhood && formik.errors.neighborhood}
             />
@@ -182,6 +188,7 @@ function FormSorteio() {
               name="complement"
               autoComplete="complement"
               autoFocus
+              inputProps={{"data-testid": 'complement'}}
               error={formik.touched.complement && Boolean(formik.errors.complement)}
               helperText={formik.touched.complement && formik.errors.complement}
             />
@@ -198,6 +205,7 @@ function FormSorteio() {
               name="city"
               autoComplete="city"
               autoFocus
+              inputProps={{"data-testid": 'city'}}
               error={formik.touched.city && Boolean(formik.errors.city)}
               helperText={formik.touched.city && formik.errors.city}
             />
@@ -214,6 +222,7 @@ function FormSorteio() {
               name="state"
               autoComplete="state"
               autoFocus
+              inputProps={{"data-testid": 'state'}}
               error={formik.touched.state && Boolean(formik.errors.state)}
               helperText={formik.touched.state && formik.errors.state}
             />
@@ -230,6 +239,7 @@ function FormSorteio() {
               name="description"
               autoComplete="description"
               autoFocus
+              inputProps={{"data-testid": 'description'}}
               error={formik.touched.description && Boolean(formik.errors.description)}
               helperText={formik.touched.description && formik.errors.description}
             />
@@ -240,6 +250,7 @@ function FormSorteio() {
               type="submit"
               style={{ backgroundColor:"#147A12" }}
               sx={{ mt: 3, mb: 2 }}
+              data-testid="submit"
             >
               Cadastrar
             </Button>
