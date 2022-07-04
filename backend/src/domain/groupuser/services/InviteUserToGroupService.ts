@@ -11,7 +11,7 @@ import IGroupUserRepository from "../repositories/IGroupUserRepository";
 import IInvitedUserRepository from "../repositories/IInvitedUserRepository";
 
 @injectable()
-class InviteUserToGroupSerive {
+class InviteUserToGroupService {
     constructor(
         @inject(USER_REPOSITORY)
         private readonly userRepository: IUserRepository,
@@ -37,4 +37,4 @@ class InviteUserToGroupSerive {
     }
 }
 
-export default InviteUserToGroupSerive;
+export default InviteUserToGroupService;

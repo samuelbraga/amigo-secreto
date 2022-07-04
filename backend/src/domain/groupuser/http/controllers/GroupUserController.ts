@@ -8,15 +8,15 @@ import GetGroupsByUserService from "@domain/groupuser/services/GetGroupsByUserSe
 import ExceptionBase from "@shared/exceptions/ExceptionBase";
 
 import GroupUserService from "../../services/GroupUserService";
-import InviteUserToGroupSerive from "../../services/InviteUserToGroupSerive";
+import InviteUserToGroupService from "../../services/InviteUserToGroupService";
 
 export default class GroupUserController {
     public async inviteUser(
         request: Request,
         response: Response
     ): Promise<Response> {
-        const inviteUserToGroupSerive = container.resolve(
-            InviteUserToGroupSerive
+        const InviteUserToGroupService = container.resolve(
+            InviteUserToGroupService
         );
 
         const groupId = request.params.id;
@@ -32,7 +32,7 @@ export default class GroupUserController {
             );
         }
 
-        await inviteUserToGroupSerive.execute(groupId, email);
+        await InviteUserToGroupService.execute(groupId, email);
 
         return response.status(HttpStatus.NO_CONTENT).json();
     }
